@@ -1,13 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import {Header} from "./view/Header";
 
-function App() {
-  return (
-    <div className="root">
+class App extends React.Component {
 
-    </div>
-  );
+  render(){
+      return (
+          <div className="root">
+              <header>
+                <Header />
+              </header>
+
+              <main>
+                  <div className="content-container">
+
+                  </div>
+              </main>
+
+              <footer>
+
+              </footer>
+          </div>
+      );
+  }
+
 }
 
 export default App;

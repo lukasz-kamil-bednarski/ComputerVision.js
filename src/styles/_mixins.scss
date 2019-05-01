@@ -1,0 +1,30 @@
+/*
+  Code defining flex-box container. Would be good to extend its features in the future.
+ */
+@mixin flex-box($direction, $howJustify, $howAlign, $isWrap){
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $howJustify;
+  align-items: $howAlign;
+  @if($isWrap){
+    flex-wrap: wrap;
+  }@else{
+    flex-wrap: nowrap;
+  }
+}
+
+/*
+  Creating a shadow-box template
+ */
+@mixin shadow-box($rgba-main, $rgba-after){
+  -moz-box-shadow: 1px 2px 4px $rgba-main;
+  -webkit-box-shadow: 1px 2px 4px $rgba-main;
+  box-shadow: 1px 2px 4px $rgba-main;
+
+  &:after{
+    z-index: -1; /* hide shadow behind image */
+    -webkit-box-shadow: 0 15px 20px $rgba-after;
+    -moz-box-shadow: 0 15px 20px $rgba-after;
+    box-shadow: 0 15px 20px $rgba-after;
+  }
+}

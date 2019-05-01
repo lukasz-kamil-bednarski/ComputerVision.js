@@ -1,0 +1,18 @@
+@import "styles/variables";
+@import "styles/mixins";
+
+.root{
+  margin: 0;
+  padding: 0;
+  background: $bg-color-theme;
+  width: 100vw;
+  height: 100vh;
+  @include flex-box(row, flex-start, start, true);
+}
+
+.content-container{
+  margin: 0;
+  padding: 0;
+  height: calc(100vh - #{$header-container-height});
+  width: 100vw;
+}

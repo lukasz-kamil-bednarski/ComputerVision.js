@@ -1,5 +1,8 @@
 @charset "UTF-8";
+@import "App";
 @import "styles/_variables.scss";
+@import "styles/_mixins";
+@import "styles/header";
 
 body {
   margin: 0;
@@ -15,12 +18,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-.root{
-  margin: 0;
-  padding: 0;
-  background: $bg-color-theme;
-  width: 100vw;
-  height: 100vh;
 }

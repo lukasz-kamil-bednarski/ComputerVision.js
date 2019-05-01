@@ -1,0 +1,26 @@
+@import "mixins";
+@import "variables";
+
+.header-container{
+  @include flex-box(row, flex-start, center, true);
+  @include shadow-box(rgba(0,0,0,0.5), rgba(0,0,0,0.2));
+
+  height: $header-container-height;
+  background: $head-bg-color-theme;
+  width: 100vw;
+
+  .title-container{
+    font-size: 24pt;
+    font-weight: 500;
+    margin: 0 0 0 30px;
+
+    span{
+      text-shadow: 1px 1px 2px black;
+      span{
+        color: darkred;
+
+      }
+    }
+  }
+
+}
