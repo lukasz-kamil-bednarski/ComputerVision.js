@@ -16,3 +16,21 @@
   height: calc(100vh - #{$header-container-height});
   width: 100vw;
 }
+
+/*
+  The main content-container for desktop devices
+ */
+@media screen and (min-width: $mobile-threshold-width){
+  .content-container{
+    @include flex-box(row, center, center, false)
+  }
+}
+
+/*
+  The main content-container for mobile devices
+ */
+@media screen and (min-width: $mobile-threshold-width){
+  .content-container{
+    @include flex-box(column, center, flex-start, false)
+  }
+}

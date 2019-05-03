@@ -1,0 +1,30 @@
+@import "mixins";
+@import "variables";
+
+.toolbox-container{
+  @include flex-box(column, flex-start, center, false);
+  height: calc(100vh - #{$header-container-height});
+  //width: $tool-box-container-width;
+  box-sizing: border-box;
+  padding: 30px 0 30px 0;
+
+  .drop-zone-container{
+    color: $light-color-theme;
+    border: dotted 2px #f1f1f1;
+
+    .drop-zone {
+      @include flex-box(column,center,center,true);
+      width: 200px;
+      height: 120px;
+      input {
+        display: none;
+        visibility: hidden;
+      }
+
+      p{
+        font-size: 16px;
+        font-weight: 700;
+      }
+    }
+  }
+}
