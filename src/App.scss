@@ -15,6 +15,7 @@
   padding: 0;
   height: calc(100vh - #{$header-container-height});
   width: 100vw;
+  box-sizing: border-box;
 }
 
 /*
@@ -22,14 +23,14 @@
  */
 @media screen and (min-width: $mobile-threshold-width){
   .content-container{
-    @include flex-box(row, center, center, false)
+    @include flex-box(row, flex-start, center, false)
   }
 }
 
 /*
   The main content-container for mobile devices
  */
-@media screen and (min-width: $mobile-threshold-width){
+@media screen and (max-width: $mobile-threshold-width){
   .content-container{
     @include flex-box(column, center, flex-start, false)
   }

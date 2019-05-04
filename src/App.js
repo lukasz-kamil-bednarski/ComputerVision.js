@@ -2,6 +2,7 @@ import React from 'react';
 import './App.scss';
 import {Header} from "./view/Header";
 import {ToolBox} from "./view/ToolBox";
+import MainContent from "./view/MainContent";
 
 class App extends React.Component {
 
@@ -15,6 +16,7 @@ class App extends React.Component {
               <main>
                   <div className="content-container">
                         <ToolBox/>
+                        <MainContent/>
                   </div>
               </main>
 

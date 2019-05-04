@@ -4,13 +4,13 @@
 .toolbox-container{
   @include flex-box(column, flex-start, center, false);
   height: calc(100vh - #{$header-container-height});
-  //width: $tool-box-container-width;
+  width: $tool-box-container-width;
   box-sizing: border-box;
-  padding: 30px 0 30px 0;
+  padding: 30px 10px 30px 10px;
 
   .drop-zone-container{
-    color: $light-color-theme;
-    border: dotted 2px #f1f1f1;
+    color: $dark-color-theme;
+    border: dotted 2px $dark-color-theme;
 
     .drop-zone {
       @include flex-box(column,center,center,true);

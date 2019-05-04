@@ -28,3 +28,13 @@
     box-shadow: 0 15px 20px $rgba-after;
   }
 }
+
+/*
+  Makes an DOM element have grab cursor over it
+ */
+@mixin grab-active(){
+  //cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}

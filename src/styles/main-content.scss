@@ -1,0 +1,8 @@
+@import "variables";
+@import "mixins";
+
+.main-content-container{
+  width: calc(100vw - #{$tool-box-container-width});
+  height: calc(100vh - #{$header-container-height});
+  @include flex-box(row, center, center, true);
+}
