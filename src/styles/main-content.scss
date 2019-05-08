@@ -2,7 +2,13 @@
 @import "mixins";
 
 .main-content-container{
-  width: calc(100vw - #{$tool-box-container-width});
+  width: 100vw;
   height: calc(100vh - #{$header-container-height});
   @include flex-box(row, center, center, true);
+  background: $main-content-bg-color;
+
+  .fun-canvas{
+    background: transparent!important;
+
+  }
 }

@@ -1,30 +1,60 @@
 @import "mixins";
 @import "variables";
 
-.toolbox-container{
-  @include flex-box(column, flex-start, center, false);
-  height: calc(100vh - #{$header-container-height});
-  width: $tool-box-container-width;
-  box-sizing: border-box;
-  padding: 30px 10px 30px 10px;
+.toolbox-container {
+  @include flex-box(row, flex-start, flex-start, false);
+  background: $main-content-bg-color;
+  position: absolute;
+  transition: 0.7s ease;
+  z-index: 100;
 
-  .drop-zone-container{
-    color: $dark-color-theme;
-    border: dotted 2px $dark-color-theme;
+  .toolbox-content {
+    @include flex-box(column, flex-start, center, false);
+    width: $tool-box-container-width;
+    box-sizing: border-box;
+    padding: 30px 10px 30px 10px;
+    background: $tool-box-container-bg;
+    height: calc(100vh - #{$header-container-height});
 
-    .drop-zone {
-      @include flex-box(column,center,center,true);
-      width: 200px;
-      height: 120px;
-      input {
-        display: none;
-        visibility: hidden;
+    .drop-zone-container {
+      color: $dark-color-theme;
+      border: dotted 2px $dark-color-theme;
+
+      .drop-zone {
+        @include flex-box(column, center, center, true);
+        width: 200px;
+        height: 120px;
+        input {
+          display: none;
+          visibility: hidden;
+        }
+        p {
+          font-size: 16px;
+          font-weight: 700;
+        }
       }
+    }
+  }
 
-      p{
-        font-size: 16px;
-        font-weight: 700;
-      }
+  &.non-active{
+    @include translate-box(-$tool-box-container-width,0);
+  }
+
+  &.active{
+    @include translate-box(0,0);
+  }
+
+  .toolbox-trigger{
+    background: $light-color-theme;
+    top: 0;
+    padding: 8px 15px 8px 15px;
+    border-bottom-right-radius: 20px;
+    cursor: pointer;
+
+    span{
+      color: $dark-color-theme;
+      font-weight: 800;
+      display: block;
     }
   }
 }

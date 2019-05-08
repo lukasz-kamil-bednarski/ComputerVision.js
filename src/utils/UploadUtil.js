@@ -22,19 +22,18 @@ export default class UploadUtil {
      * @param canvas
      * @param canvasOriginalSize
      */
-    static drawScaledImageOntoCanvas(image, canvas, canvasOriginalSize){
+    static drawScaledImageOntoCanvas(image, canvas){
         const ctx = canvas.getContext("2d");
 
         const imgWidth = image.naturalWidth;
         const imgHeight = image.naturalHeight;
         let aspectRatio;
-        console.log(imgWidth)
 
         if(ctx !== null) {
 
 
-            const width = canvasOriginalSize.width;
-            const height = canvasOriginalSize.height;
+            const width = 400;
+            const height = 400;
 
             ctx.canvas.width = width;
             ctx.canvas.height = height; //restoring default values

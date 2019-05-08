@@ -30,6 +30,16 @@
 }
 
 /*
+  Translating elements with given values
+ */
+@mixin translate-box($translateX, $translateY){
+  transform:translate($translateX,$translateY);
+  -webkit-transform:translate($translateX, $translateY);
+  -moz-transform:translate($translateX, $translateY);
+  -o-transform:translate($translateX,$translateY);
+}
+
+/*
   Makes an DOM element have grab cursor over it
  */
 @mixin grab-active(){
