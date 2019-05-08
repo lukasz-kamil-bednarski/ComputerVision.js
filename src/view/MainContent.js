@@ -6,9 +6,17 @@ class MainContent extends React.Component {
     render(){
         return (
         <div className="main-content-container">
-            <canvas style={{background:'red'}} width={400} height={400} className="fun-canvas active"> </canvas>
+            <canvas ref={(canvas) => {this.canvas = canvas}}
+                    width={400}
+                    height={400}
+                    id= "fun-canvas"
+                    className="fun-canvas active">Your browser is not supporting canvas</canvas>
         </div>
         );
+    }
+
+    componentDidMount = () =>{
+        //console.log(this.canvas)
     }
 
 }
