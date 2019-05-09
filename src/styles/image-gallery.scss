@@ -3,7 +3,7 @@
 
 .image-gallery-container {
   @include flex-box(row, flex-start, flex-start, false);
-  background: $main-content-bg-color;
+  background: transparent;
   position: absolute;
   transition: 0.7s ease;
   z-index: 100;
@@ -40,5 +40,12 @@
 
   &.active{
     @include translate-box(0,0);
+  }
+}
+
+
+@media screen and (max-width: $mobile-threshold-width){
+  .image-gallery-container{
+    display: none;
   }
 }

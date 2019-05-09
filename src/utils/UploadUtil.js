@@ -1,3 +1,5 @@
+import {Settings} from '../settings/Settings'
+
 export default class UploadUtil {
 
     /**
@@ -31,8 +33,8 @@ export default class UploadUtil {
         if(ctx !== null) {
 
 
-            const width = 400;
-            const height = 400;
+            const width = Settings.funCanvasDesktopSize.width;
+            const height = Settings.funCanvasDesktopSize.height;
 
             ctx.canvas.width = width;
             ctx.canvas.height = height; //restoring default values

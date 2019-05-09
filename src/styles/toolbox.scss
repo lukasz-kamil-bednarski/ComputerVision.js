@@ -3,7 +3,7 @@
 
 .toolbox-container {
   @include flex-box(row, flex-start, flex-start, false);
-  background: $main-content-bg-color;
+  background: transparent;
   position: absolute;
   transition: 0.7s ease;
   z-index: 100;
@@ -56,5 +56,13 @@
       font-weight: 800;
       display: block;
     }
+  }
+}
+
+
+@media screen and (max-width: $mobile-threshold-width){
+
+  .toolbox-container{
+    display: none;
   }
 }

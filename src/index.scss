@@ -16,9 +16,19 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@media screen and (max-width: $mobile-threshold-width) {
+  overflow-y: scroll;
+}
+
+@media screen and (min-width: $mobile-threshold-width){
+  overflow-y: auto;
 }
