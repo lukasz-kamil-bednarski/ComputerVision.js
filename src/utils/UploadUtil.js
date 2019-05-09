@@ -20,7 +20,6 @@ export default class UploadUtil {
      * Method drawing a given Image object onto a given canvas element with a given size
      * @param image
      * @param canvas
-     * @param canvasOriginalSize
      */
     static drawScaledImageOntoCanvas(image, canvas){
         const ctx = canvas.getContext("2d");

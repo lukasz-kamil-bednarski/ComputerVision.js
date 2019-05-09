@@ -34,10 +34,11 @@ export const ToolBox = (props) => {
  * @param files
  */
 function drawDroppedImage(files) {
+
     let canvas = document.getElementById("fun-canvas");
     let file = files[0];
-    const url = URL.createObjectURL(file),
-        img = new Image();
+    const url = URL.createObjectURL(file);
+    const img = new Image();
 
     img.onload = function () {
         URL.revokeObjectURL(this.src);
@@ -46,10 +47,11 @@ function drawDroppedImage(files) {
     img.src = url;
 }
 
+/**
+ * Activating or deactivating a toolbox
+ */
 function triggerToolbox() {
-
     let container = document.getElementsByClassName("toolbox-container")[0];
-
     if(container.classList.contains("non-active")){
         container.className = "toolbox-container active";
     }else{

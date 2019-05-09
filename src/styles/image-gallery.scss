@@ -1,0 +1,44 @@
+@import "mixins";
+@import "variables";
+
+.image-gallery-container {
+  @include flex-box(row, flex-start, flex-start, false);
+  background: $main-content-bg-color;
+  position: absolute;
+  transition: 0.7s ease;
+  z-index: 100;
+  right: 0;
+
+
+  .image-gallery-trigger{
+    background: $light-color-theme;
+    top: 0;
+    padding: 8px 15px 8px 15px;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+
+    span{
+      color: $dark-color-theme;
+      font-weight: 800;
+      display: block;
+    }
+  }
+
+  .image-gallery-content {
+    @include flex-box(column, flex-start, center, false);
+    min-width: $image-gallery-container-width;
+    background-color: $light-color-theme;
+    box-sizing: border-box;
+    padding: 30px 10px 30px 10px;
+    height: calc(100vh - #{$header-container-height});
+
+  }
+
+  &.non-active{
+    @include translate-box($image-gallery-container-width,0);
+  }
+
+  &.active{
+    @include translate-box(0,0);
+  }
+}
