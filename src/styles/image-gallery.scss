@@ -8,7 +8,7 @@
   transition: 0.7s ease;
   z-index: 100;
   right: 0;
-
+  min-width: $image-gallery-container-width;
 
   .image-gallery-trigger{
     background: $light-color-theme;
@@ -16,6 +16,7 @@
     padding: 8px 15px 8px 15px;
     border-bottom-left-radius: 20px;
     cursor: pointer;
+
 
     span{
       color: $dark-color-theme;
@@ -26,11 +27,19 @@
 
   .image-gallery-content {
     @include flex-box(column, flex-start, center, false);
-    min-width: $image-gallery-container-width;
     background-color: $light-color-theme;
     box-sizing: border-box;
+    width: $image-gallery-container-width;
     padding: 30px 10px 30px 10px;
     height: calc(100vh - #{$header-container-height});
+
+
+    .image-gallery-list{
+      @include flex-box(column, flex-start, center, false);
+      height: 100%;
+      width: 100%;
+      overflow-y:auto;
+    }
 
   }
 

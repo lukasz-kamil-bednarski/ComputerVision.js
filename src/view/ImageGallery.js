@@ -1,9 +1,27 @@
 import React from "react";
 import {connect} from 'react-redux';
 
-class ImageGallery extends React.Component{
+class ImageGallery extends React.Component {
 
-    render(){
+    renderImageGallery = (image) => {
+        console.log(image.width);
+        if (image.width > image.height) {
+            return (
+                <div className="single-image-container">
+                    <img width={400} height={300} src={image.src}/>
+                </div>
+            )
+        } else {
+            return (
+
+                <div className="single-image-container">
+                    <img width={300} height={400} src={image.src}/>
+                </div>
+            )
+        }
+    };
+
+    render() {
         return (
             <div className="image-gallery-container non-active">
                 <div onClick={triggerImageGallery} className="image-gallery-trigger">
@@ -11,6 +29,9 @@ class ImageGallery extends React.Component{
                 </div>
 
                 <div className="image-gallery-content">
+                    <div className="image-gallery-list">
+                        {this.props.imageGallery.map(this.renderImageGallery)}
+                    </div>
                 </div>
             </div>
         )
@@ -22,9 +43,9 @@ class ImageGallery extends React.Component{
  */
 function triggerImageGallery() {
     let container = document.getElementsByClassName("image-gallery-container")[0];
-    if(container.classList.contains("non-active")){
+    if (container.classList.contains("non-active")) {
         container.className = "image-gallery-container active";
-    }else{
+    } else {
         container.className = "image-gallery-container non-active";
     }
 }

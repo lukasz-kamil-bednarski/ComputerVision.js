@@ -23,15 +23,16 @@ class ToolBox extends React.Component{
 
         img.onload = () => {
             URL.revokeObjectURL(img.src);
-            let obj = UploadUtil.drawScaledImageOntoCanvas(img, canvas);
-            this.addNewImage(obj.data);
+            UploadUtil.drawScaledImageOntoCanvas(img, canvas);
+            //console.log(img.naturalWidth);
 
         };
         img.src = url;
+        this.addNewImage(img);
+
     };
 
     render(){
-        console.log(this.props.imageGallery);
         return (
             <div className="toolbox-container non-active">
                 <div className="toolbox-content">
