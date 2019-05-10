@@ -1,12 +1,10 @@
 import {ADD_NEW_IMAGE} from "../actions/imageGalleryActions";
 
-export function imageGalleryReducer(state = ['TEST'], action) {
+export function imageGalleryReducer(state = [], action) {
     switch (action.type) {
         case ADD_NEW_IMAGE:
-            console.log("works");
-            return action.payload;
+            return [...state, action.payload];
         default:
-            console.log("XD");
             return state
     }
 }

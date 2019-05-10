@@ -6,18 +6,43 @@ import {connect} from 'react-redux';
 
 class ToolBox extends React.Component{
 
-    addNewImage = (e) =>{
-        console.clear();
-        console.log(e.target.value);
-      this.props.addNewImage(e.target.value);
+    addNewImage = (img) =>{
+      this.props.addNewImage(img);
+    };
+
+    /**
+     * Drawing an image in the fun-canvas on drop
+     * @param files
+     */
+    drawDroppedImage = (files) => {
+
+        let canvas = document.getElementById("fun-canvas");
+        let file = files[0];
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+
+        img.onload = () => {
+            URL.revokeObjectURL(img.src);
+            let obj = UploadUtil.drawScaledImageOntoCanvas(img, canvas);
+            this.addNewImage(obj.data);
+
+        };
+        img.src = url;
+
+
+
+
+
+
     };
 
     render(){
+        console.log(this.props.imageGallery);
         return (
             <div className="toolbox-container non-active">
                 <div className="toolbox-content">
                     <div className="drop-zone-container">
-                        <Dropzone onDrop={acceptedFiles => drawDroppedImage(acceptedFiles)}>
+                        <Dropzone onDrop={acceptedFiles => this.drawDroppedImage(acceptedFiles)}>
                             {({getRootProps, getInputProps}) => (
                                 <section>
                                     <div className="drop-zone" {...getRootProps()}>
@@ -28,13 +53,7 @@ class ToolBox extends React.Component{
                             )}
                         </Dropzone>
                     </div>
-                    <div>
-                        <input onChange={this.addNewImage}/>
-                    </div>
 
-                    <div>
-                        {this.props.imageGallery}
-                    </div>
                 </div>
 
                 <div onClick={triggerToolbox} className="toolbox-trigger">
@@ -43,23 +62,6 @@ class ToolBox extends React.Component{
             </div>
         )
     }
-}
-/**
- * Drawing an image in the fun-canvas on drop
- * @param files
- */
-function drawDroppedImage(files) {
-
-    let canvas = document.getElementById("fun-canvas");
-    let file = files[0];
-    const url = URL.createObjectURL(file);
-    const img = new Image();
-
-    img.onload = function () {
-        URL.revokeObjectURL(this.src);
-        UploadUtil.drawScaledImageOntoCanvas(this, canvas);
-    };
-    img.src = url;
 }
 
 /**
