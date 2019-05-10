@@ -1,34 +1,49 @@
 import React from "react";
 import Dropzone from 'react-dropzone'
 import UploadUtil from '../utils/UploadUtil'
+import {addNewImage} from "../actions/imageGalleryActions";
+import {connect} from 'react-redux';
 
-export const ToolBox = (props) => {
+class ToolBox extends React.Component{
 
+    addNewImage = (e) =>{
+        console.clear();
+        console.log(e.target.value);
+      this.props.addNewImage(e.target.value);
+    };
 
-    return (
-        <div className="toolbox-container non-active">
-            <div className="toolbox-content">
-                <div className="drop-zone-container">
-                    <Dropzone onDrop={acceptedFiles => drawDroppedImage(acceptedFiles)}>
-                        {({getRootProps, getInputProps}) => (
-                            <section>
-                                <div className="drop-zone" {...getRootProps()}>
-                                    <input/>
-                                    <p>Dropzone</p>
-                                </div>
-                            </section>
-                        )}
-                    </Dropzone>
+    render(){
+        return (
+            <div className="toolbox-container non-active">
+                <div className="toolbox-content">
+                    <div className="drop-zone-container">
+                        <Dropzone onDrop={acceptedFiles => drawDroppedImage(acceptedFiles)}>
+                            {({getRootProps, getInputProps}) => (
+                                <section>
+                                    <div className="drop-zone" {...getRootProps()}>
+                                        <input/>
+                                        <p>Dropzone</p>
+                                    </div>
+                                </section>
+                            )}
+                        </Dropzone>
+                    </div>
+                    <div>
+                        <input onChange={this.addNewImage}/>
+                    </div>
+
+                    <div>
+                        {this.props.imageGallery}
+                    </div>
+                </div>
+
+                <div onClick={triggerToolbox} className="toolbox-trigger">
+                    <span>Toolbox</span>
                 </div>
             </div>
-
-            <div onClick={triggerToolbox} className="toolbox-trigger">
-                <span>Toolbox</span>
-            </div>
-        </div>
-    )
-};
-
+        )
+    }
+}
 /**
  * Drawing an image in the fun-canvas on drop
  * @param files
@@ -58,3 +73,17 @@ function triggerToolbox() {
         container.className = "toolbox-container non-active";
     }
 }
+
+
+const mapStateToProps = state => {
+
+    return{
+        imageGallery: state.imageGallery
+    }
+
+};
+const mapActionsToProps = {
+    addNewImage: addNewImage
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(ToolBox);

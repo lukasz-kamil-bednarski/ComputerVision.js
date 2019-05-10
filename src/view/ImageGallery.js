@@ -1,20 +1,21 @@
 import React from "react";
-import Dropzone from "react-dropzone";
+import {ADD_NEW_IMAGE} from "../actions/imageGalleryActions";
 
+class ImageGallery extends React.Component{
 
-export const ImageGallery = (props) => {
+    render(){
+        return (
+            <div className="image-gallery-container non-active">
+                <div onClick={triggerImageGallery} className="image-gallery-trigger">
+                    <span>Gallery</span>
+                </div>
 
-    return (
-        <div className="image-gallery-container non-active">
-            <div onClick={triggerImageGallery} className="image-gallery-trigger">
-                <span>Gallery</span>
+                <div className="image-gallery-content">
+                </div>
             </div>
-
-            <div className="image-gallery-content">
-            </div>
-        </div>
-    )
-};
+        )
+    }
+}
 
 /**
  * Activating or deactivating an image-gallery
@@ -27,3 +28,5 @@ function triggerImageGallery() {
         container.className = "image-gallery-container non-active";
     }
 }
+
+export default ImageGallery;
