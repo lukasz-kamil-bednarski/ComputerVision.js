@@ -3,22 +3,13 @@ import {connect} from 'react-redux';
 
 class ImageGallery extends React.Component {
 
-    renderImageGallery = (image) => {
-        console.log(image.width);
-        if (image.width > image.height) {
-            return (
-                <div className="single-image-container">
-                    <img width={400} height={300} src={image.src}/>
-                </div>
-            )
-        } else {
-            return (
+    renderImageGallery = (image, index) => {
+        return (
+            <div key={index} className="single-image-container">
+                <img src={image.src}/>
+            </div>
+        )
 
-                <div className="single-image-container">
-                    <img width={300} height={400} src={image.src}/>
-                </div>
-            )
-        }
     };
 
     render() {

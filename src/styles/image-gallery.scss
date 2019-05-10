@@ -30,7 +30,6 @@
     background-color: $light-color-theme;
     box-sizing: border-box;
     width: $image-gallery-container-width;
-    padding: 30px 10px 30px 10px;
     height: calc(100vh - #{$header-container-height});
 
 
@@ -39,6 +38,24 @@
       height: 100%;
       width: 100%;
       overflow-y:auto;
+
+      .single-image-container{
+        @include flex-box(column, flex-start, center, false);
+        margin-top: 20px;
+        width: 100%;
+        img{
+          max-width: 400px;
+          max-height: 300px;
+        }
+      }
+
+      &:first-child{
+        margin-top: 0;
+      }
+    }
+
+    .image-gallery-list:not(:first-child){
+      margin-top: 10px;
     }
 
   }
