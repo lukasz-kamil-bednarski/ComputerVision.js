@@ -35,22 +35,20 @@
 
     .image-gallery-list{
       @include flex-box(column, flex-start, center, false);
+
       height: 100%;
       width: 100%;
       overflow-y:auto;
 
       .single-image-container{
         @include flex-box(column, flex-start, center, false);
-        margin-top: 20px;
+        margin-bottom: 20px;
         width: 100%;
         img{
           max-width: 400px;
           max-height: 300px;
+          cursor: pointer;
         }
-      }
-
-      &:first-child{
-        margin-top: 0;
       }
     }
 

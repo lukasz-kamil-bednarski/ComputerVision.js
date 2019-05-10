@@ -4,10 +4,10 @@ import UploadUtil from '../utils/UploadUtil'
 import {addNewImage} from "../actions/imageGalleryActions";
 import {connect} from 'react-redux';
 
-class ToolBox extends React.Component{
+class ToolBox extends React.Component {
 
-    addNewImage = (img) =>{
-      this.props.addNewImage(img);
+    addNewImage = (img) => {
+        this.props.addNewImage(img);
     };
 
     /**
@@ -17,22 +17,21 @@ class ToolBox extends React.Component{
     drawDroppedImage = (files) => {
 
         let canvas = document.getElementById("fun-canvas");
-        let file = files[0];
-        const url = URL.createObjectURL(file);
-        const img = new Image();
+        for (let file of files) {
+            const url = URL.createObjectURL(file);
+            const img = new Image();
 
-        img.onload = () => {
-            URL.revokeObjectURL(img.src);
-            UploadUtil.drawScaledImageOntoCanvas(img, canvas);
-            //console.log(img.naturalWidth);
-
-        };
-        img.src = url;
-        this.addNewImage(img);
+            img.onload = () => {
+                URL.revokeObjectURL(img.src);
+                UploadUtil.drawScaledImageOntoCanvas(img, canvas);
+            };
+            img.src = url;
+            this.addNewImage(img);
+        }
 
     };
 
-    render(){
+    render() {
         return (
             <div className="toolbox-container non-active">
                 <div className="toolbox-content">
@@ -64,9 +63,9 @@ class ToolBox extends React.Component{
  */
 function triggerToolbox() {
     let container = document.getElementsByClassName("toolbox-container")[0];
-    if(container.classList.contains("non-active")){
+    if (container.classList.contains("non-active")) {
         container.className = "toolbox-container active";
-    }else{
+    } else {
         container.className = "toolbox-container non-active";
     }
 }
@@ -74,7 +73,7 @@ function triggerToolbox() {
 
 const mapStateToProps = state => {
 
-    return{
+    return {
         imageGallery: state.imageGallery
     }
 
