@@ -28,12 +28,6 @@ class ToolBox extends React.Component{
 
         };
         img.src = url;
-
-
-
-
-
-
     };
 
     render(){

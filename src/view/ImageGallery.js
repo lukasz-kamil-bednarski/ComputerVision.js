@@ -1,5 +1,5 @@
 import React from "react";
-import {ADD_NEW_IMAGE} from "../actions/imageGalleryActions";
+import {connect} from 'react-redux';
 
 class ImageGallery extends React.Component{
 
@@ -29,4 +29,11 @@ function triggerImageGallery() {
     }
 }
 
-export default ImageGallery;
+const mapStateToProps = state => {
+
+    return {
+        imageGallery: state.imageGallery
+    }
+};
+
+export default connect(mapStateToProps)(ImageGallery);
