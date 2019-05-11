@@ -5,7 +5,6 @@ export function addNewImage(newImage){
     return {
         type: ADD_NEW_IMAGE,
         payload: newImage
-
         }
     }
 

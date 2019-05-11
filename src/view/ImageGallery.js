@@ -3,23 +3,31 @@ import {connect} from 'react-redux';
 import 'bootstrap/scss/bootstrap.scss';
 import trash from '../assets/png/trash-circle.png';
 import {setMainImage} from "../actions/imageGalleryActions";
+import UploadUtil from "../utils/UploadUtil";
 
 class ImageGallery extends React.Component {
 
     renderImageGallery = (image, index) => {
         return (
-            <div key={index} className="single-image-container" onClick={this.setFunCanvasImage}>
-                <div className="delete-image-container" >
-                  <img width={40} height={40} src={trash} />
+            <div key={index} className="single-image-container" onClick={() => this.setFunCanvasImage(index)}>
+                <div className="delete-image-container">
+                    <img width={40} height={40} src={trash}/>
                 </div>
                 <img src={image.src}/>
             </div>
         )
     };
 
-    setFunCanvasImage = () =>{
-        console.log("Xd");
-        setMainImage(3);
+    setFunCanvasImage = (index) => {
+        this.props.setMainImage(index);
+        this.drawMainImage(index);
+
+    };
+
+    drawMainImage = (newIndex) => {
+        let img = this.props.images[newIndex];
+        let canvas = document.getElementById("fun-canvas");
+        UploadUtil.drawScaledImageOntoCanvas(img, canvas);
     };
 
     render() {

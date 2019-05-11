@@ -18,6 +18,10 @@ export default class UploadUtil {
 
     };
 
+    static drawRawImageToCanvas(rawImage){
+
+    }
+
     /**
      * Method drawing a given Image object onto a given canvas element with a given size
      * @param image
