@@ -32,13 +32,16 @@
     width: $image-gallery-container-width;
     height: calc(100vh - #{$header-container-height});
 
-
     .image-gallery-list{
       @include flex-box(column, flex-start, center, false);
-
+      box-sizing: border-box;
       height: 100%;
       width: 100%;
       overflow-y:auto;
+
+      :first-child{
+        margin-top: 0!important;
+      }
 
       .single-image-container{
         @include flex-box(column, flex-start, center, false);
@@ -48,7 +51,17 @@
           max-width: 400px;
           max-height: 300px;
           cursor: pointer;
+          border: solid 1px $silver-color-theme;
+
+          &:hover{
+            border: solid 1px $dark-color-theme;
+          }
+
         }
+      }
+
+      :last-child{
+        margin-bottom: 0!important;
       }
     }
 
