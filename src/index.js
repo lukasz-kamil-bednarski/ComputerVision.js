@@ -6,6 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import {createStore, combineReducers} from 'redux';
 import {imageGalleryReducer} from "./reducers/imageGalleryReducer";
 import {Provider} from 'react-redux';
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 
 const allReducers = combineReducers({
