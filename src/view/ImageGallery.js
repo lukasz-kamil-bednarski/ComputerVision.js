@@ -2,18 +2,24 @@ import React from "react";
 import {connect} from 'react-redux';
 import 'bootstrap/scss/bootstrap.scss';
 import trash from '../assets/png/trash-circle.png';
+import {setMainImage} from "../actions/imageGalleryActions";
+
 class ImageGallery extends React.Component {
 
     renderImageGallery = (image, index) => {
         return (
-            <div key={index} className="single-image-container">
-                <div className="delete-image-container">
+            <div key={index} className="single-image-container" onClick={this.setFunCanvasImage}>
+                <div className="delete-image-container" >
                   <img width={40} height={40} src={trash} />
                 </div>
                 <img src={image.src}/>
             </div>
         )
+    };
 
+    setFunCanvasImage = () =>{
+        console.log("Xd");
+        setMainImage(3);
     };
 
     render() {
@@ -25,7 +31,7 @@ class ImageGallery extends React.Component {
 
                 <div className="image-gallery-content">
                     <div className="image-gallery-list">
-                        {this.props.imageGallery.map(this.renderImageGallery)}
+                        {this.props.images.map(this.renderImageGallery)}
                     </div>
                 </div>
             </div>
@@ -48,8 +54,13 @@ function triggerImageGallery() {
 const mapStateToProps = state => {
 
     return {
-        imageGallery: state.imageGallery
+        images: state.imageGallery.images,
+        mainImageIndex: state.imageGallery.mainImageIndex
     }
 };
 
-export default connect(mapStateToProps)(ImageGallery);
+const mapActionsToProps = {
+    setMainImage: setMainImage
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(ImageGallery);
