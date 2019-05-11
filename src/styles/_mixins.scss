@@ -49,3 +49,9 @@
   cursor: -webkit-grab;
 }
 
+
+
+@mixin gray-scale-filter($gray-percent){
+  -webkit-filter: grayscale($gray-percent); /* Safari 6.0 - 9.0 */
+  filter: grayscale($gray-percent);
+}

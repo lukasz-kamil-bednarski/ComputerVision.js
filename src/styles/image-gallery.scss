@@ -38,6 +38,9 @@
       height: 100%;
       width: 100%;
       overflow-y:auto;
+      //overflow-x: hidden;
+      padding:0 15px 0 15px;
+
 
       :first-child{
         margin-top: 0!important;
@@ -46,17 +49,28 @@
       .single-image-container{
         @include flex-box(column, flex-start, center, false);
         margin-bottom: 20px;
-        width: 100%;
+        box-sizing: border-box;
+        border: solid 1px $silver-color-theme;
+        background-size: cover;
+        background-position: center;
+
         img{
           max-width: 400px;
           max-height: 300px;
           cursor: pointer;
-          border: solid 1px $silver-color-theme;
+          background-size: cover;
+          background-position: center;
+          object-fit:cover;
+          @include gray-scale-filter(50%);
+          transition: 0.2s ease;
 
           &:hover{
-            border: solid 1px $dark-color-theme;
+            @include gray-scale-filter(0%);
           }
+        }
 
+        &:hover{
+          border: solid 1px $dark-color-theme;;
         }
       }
 
