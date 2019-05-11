@@ -33,13 +33,11 @@
     height: calc(100vh - #{$header-container-height});
 
     .image-gallery-list{
-      @include flex-box(column, flex-start, center, false);
       box-sizing: border-box;
-      height: 100%;
-      width: 100%;
-      overflow-y:auto;
+      overflow:auto;
       //overflow-x: hidden;
       padding:0 15px 0 15px;
+      min-height:100%;
 
 
       :first-child{
@@ -50,10 +48,10 @@
         @include flex-box(column, flex-start, center, false);
         margin-bottom: 20px;
         box-sizing: border-box;
-        border: solid 1px $silver-color-theme;
         background-size: cover;
         background-position: center;
         overflow: hidden;
+        transition: 0.7s ease;
 
         img{
           max-width: 100%;
@@ -64,28 +62,32 @@
           object-fit:cover;
           @include gray-scale-filter(50%);
           transition: 0.2s ease;
+          border: solid 1px $silver-color-theme;
 
           &:hover{
             @include gray-scale-filter(0%);
             @include zoom-in(1.1);
+            border: solid 1px $dark-color-theme;;
           }
         }
 
-        &:hover{
-          border: solid 1px $dark-color-theme;;
-        }
 
         .delete-image-container{
           height: 0;
-          display: block;
+          display: none;
           position: relative;
-          top: 0;
+          top: 5px;
           z-index: 100;
-          left: calc(50% - 20px);
-
+          left: calc(50% - 25px);
           img{
             width: 40px;
             height: 40px;
+            border: none;
+          }
+        }
+        &:hover{
+          .delete-image-container{
+            display: block;
           }
         }
       }
