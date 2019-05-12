@@ -8,12 +8,16 @@ import UploadUtil from "../utils/UploadUtil";
 class ImageGallery extends React.Component {
 
     renderImageGallery = (image, index) => {
+        let className = "";
+        if(index === this.props.mainImageIndex){
+            className += "active"
+        }
         return (
-            <div key={index} className="single-image-container" onClick={() => this.setFunCanvasImage(index)}>
+            <div key={index} className="single-image-container"  onClick={() => this.setFunCanvasImage(index)}>
                 <div className="delete-image-container">
                     <img width={40} height={40} src={trash}/>
                 </div>
-                <img src={image.src}/>
+                <img className={className} src={image.src}/>
             </div>
         )
     };
@@ -39,7 +43,7 @@ class ImageGallery extends React.Component {
 
                 <div className="image-gallery-content">
                     <div className="image-gallery-list">
-                        {this.props.images.map(this.renderImageGallery)}
+                        {this.props.images.map(this.renderImageGallery).reverse()}
                     </div>
                 </div>
             </div>

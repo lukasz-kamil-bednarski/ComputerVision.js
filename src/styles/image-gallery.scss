@@ -36,9 +36,8 @@
       box-sizing: border-box;
       overflow:auto;
       //overflow-x: hidden;
-      padding:0 15px 0 15px;
+      padding:10px 15px 10px 15px;
       min-height:100%;
-
 
       :first-child{
         margin-top: 0!important;
@@ -51,26 +50,29 @@
         background-size: cover;
         background-position: center;
         overflow: hidden;
-        transition: 0.7s ease;
 
-        img{
+        &>img{
           max-width: 100%;
           max-height: 300px;
           cursor: pointer;
           background-size: cover;
           background-position: center;
           object-fit:cover;
-          @include gray-scale-filter(50%);
-          transition: 0.2s ease;
-          border: solid 1px $silver-color-theme;
+          @include gray-scale-filter(80%);
+          transition: 0.5s ease;
+          -webkit-box-shadow:0 0 20px rgba(0, 0, 0, 0.5);
+          -moz-box-shadow:0 0 20px rgba(0, 0, 0, 0.5);
+          box-shadow:0 0 20px rgba(0, 0, 0, 0.5);
+
+          &.active{
+            @include gray-scale-filter(0);
+          }
 
           &:hover{
-            @include gray-scale-filter(0%);
+            @include gray-scale-filter(20%);
             @include zoom-in(1.1);
-            border: solid 1px $dark-color-theme;;
           }
         }
-
 
         .delete-image-container{
           height: 0;
@@ -79,6 +81,7 @@
           top: 5px;
           z-index: 100;
           left: calc(50% - 25px);
+          cursor: pointer;
           img{
             width: 40px;
             height: 40px;
