@@ -1,5 +1,6 @@
 import {ADD_NEW_IMAGE} from "../actions/imageGalleryActions";
 import {SET_MAIN_IMAGE} from "../actions/imageGalleryActions";
+import {DELETE_IMAGE} from "../actions/imageGalleryActions";
 
 export function imageGalleryReducer(state = {images:[], mainImageIndex:0}, action) {
     switch (action.type) {
@@ -15,6 +16,15 @@ export function imageGalleryReducer(state = {images:[], mainImageIndex:0}, actio
                 ...state,
                 mainImageIndex: action.payload
             };
+
+        case DELETE_IMAGE:
+            return{
+                ...state,
+                images: state.images.filter(function (value, index) {
+                    return index !== action.payload
+                })
+            };
+
         default:
             return state
     }
