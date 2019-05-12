@@ -15,9 +15,9 @@ class ImageGallery extends React.Component {
         }
         return (
             <div key={index} className="single-image-container"  onClick={() => this.setFunCanvasImage(index)}>
-                <div className="delete-image-container" onClick={(e)=>this.deleteImage(e, index)}>
-                    <img width={40} height={40} src={trash}/>
-                </div>
+                {/*<div className="delete-image-container" onClick={(e)=>this.deleteImage(e, index)}>*/}
+                    {/*<img width={40} height={40} src={trash}/>*/}
+                {/*</div>*/}
                 <img className={className} src={image.src}/>
             </div>
         )
@@ -33,11 +33,12 @@ class ImageGallery extends React.Component {
 
     };
 
-    deleteImage = (e, index)=>{
+    deleteImage = (e, delIndex)=>{
         e.stopPropagation();
-        this.props.deleteImage(index);
-
-
+        const newImages = this.props.images.filter((value, index)=>{
+           return delIndex!==index
+        });
+         this.props.deleteImage(newImages);
     };
 
     /**

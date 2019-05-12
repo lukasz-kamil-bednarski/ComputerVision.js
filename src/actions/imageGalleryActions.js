@@ -16,9 +16,9 @@ export function setMainImage(index) {
     }
 }
 
-export function deleteImage(index) {
+export function deleteImage(images) {
     return {
         type: DELETE_IMAGE,
-        payload: index
+        payload: images
     }
 }

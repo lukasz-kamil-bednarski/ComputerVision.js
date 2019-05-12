@@ -18,11 +18,11 @@ export function imageGalleryReducer(state = {images:[], mainImageIndex:0}, actio
             };
 
         case DELETE_IMAGE:
+            console.log("to del");
+            console.log(action.payload);
             return{
                 ...state,
-                images: state.images.filter(function (value, index) {
-                    return index !== action.payload
-                })
+                images: action.payload
             };
 
         default:
