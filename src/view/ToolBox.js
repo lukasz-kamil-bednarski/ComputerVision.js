@@ -3,6 +3,7 @@ import Dropzone from 'react-dropzone'
 import UploadUtil from '../utils/UploadUtil'
 import {addNewImage} from "../actions/imageGalleryActions";
 import {connect} from 'react-redux';
+import {Settings} from "../settings/Settings";
 
 class ToolBox extends React.Component {
 
@@ -31,7 +32,21 @@ class ToolBox extends React.Component {
 
     };
 
+    choose = (ev) =>{
+        console.log("dragStart");
+        ev.dataTransfer.setData("text/plain", "test data");
+
+    };
+
+    consume = (ev) =>{
+        console.log("im consuming");
+        console.log(ev.dataTransfer.getData("text"));
+    };
+
     render() {
+
+        const algorithms = Settings.algorithms;
+
         return (
             <div className="toolbox-container non-active">
                 <div className="toolbox-content">
@@ -48,6 +63,24 @@ class ToolBox extends React.Component {
                         </Dropzone>
                     </div>
 
+                    <div className="algorithms-container">
+                        {algorithms.map((category)=>{
+
+                            return (category.map((concreteAlgorithm)=>{
+                                console.log(concreteAlgorithm);
+                                return(
+                                  <div>
+                                      {concreteAlgorithm.name}
+                                  </div>
+                                )
+                            }))
+                        })}
+
+                    </div>
+
+                    {/*<div onDragStart={this.choose} style={{background:'red'}} draggable={true}>Test drag</div>*/}
+
+                    {/*<div id="target"onDrop={this.consume} style={{marginTop:'100px'}}>Drop Zone</div>*/}
                 </div>
 
                 <div onClick={triggerToolbox} className="toolbox-trigger">
