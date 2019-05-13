@@ -2,10 +2,14 @@ import React from 'react';
 
 class MainContent extends React.Component {
 
+    consumeAlgorithm = (event) =>{
+        console.log("consuming");
+    };
     render(){
         return (
         <div className="main-content-container">
             <canvas ref={(canvas) => {this.canvas = canvas}}
+                    onDrop={this.consumeAlgorithm}
                     width={800}
                     height={600}
                     id= "fun-canvas"

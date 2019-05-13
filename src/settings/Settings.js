@@ -8,7 +8,7 @@ export const Settings = {
         [
             {
                 id: 1,
-                name: 'negation',
+                name: 'negative',
                 type:'basic',
                 argumentNumber: 1,
                 isParametrized: false

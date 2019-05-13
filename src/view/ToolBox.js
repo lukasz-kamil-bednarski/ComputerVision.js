@@ -4,6 +4,7 @@ import UploadUtil from '../utils/UploadUtil'
 import {addNewImage} from "../actions/imageGalleryActions";
 import {connect} from 'react-redux';
 import {Settings} from "../settings/Settings";
+import dropLogo from "../assets/png/dropzone.png"
 
 class ToolBox extends React.Component {
 
@@ -32,15 +33,8 @@ class ToolBox extends React.Component {
 
     };
 
-    choose = (ev) =>{
-        console.log("dragStart");
-        ev.dataTransfer.setData("text/plain", "test data");
-
-    };
-
-    consume = (ev) =>{
-        console.log("im consuming");
-        console.log(ev.dataTransfer.getData("text"));
+    chooseAlgorithm = (event) =>{
+      console.log("drag start")
     };
 
     render() {
@@ -56,7 +50,7 @@ class ToolBox extends React.Component {
                                 <section>
                                     <div className="drop-zone" {...getRootProps()}>
                                         <input/>
-                                        <p>Dropzone</p>
+                                        <img src={dropLogo} alt="drop-logo"/>
                                     </div>
                                 </section>
                             )}
@@ -64,14 +58,17 @@ class ToolBox extends React.Component {
                     </div>
 
                     <div className="algorithms-container">
-                        {algorithms.map((category)=>{
+                        {algorithms.map((category) => {
 
-                            return (category.map((concreteAlgorithm)=>{
-                                console.log(concreteAlgorithm);
-                                return(
-                                  <div>
-                                      {concreteAlgorithm.name}
-                                  </div>
+                            return (category.map((concreteAlgorithm) => {
+                                return (
+                                    <div key={concreteAlgorithm.id}
+                                         title={concreteAlgorithm.name}
+                                         className="single-algorithm-container"
+                                         draggable={true}
+                                         onDragStart={this.chooseAlgorithm}>
+                                        <span>{concreteAlgorithm.name.toUpperCase()}</span>
+                                    </div>
                                 )
                             }))
                         })}

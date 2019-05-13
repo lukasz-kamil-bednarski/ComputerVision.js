@@ -18,7 +18,7 @@
 
     .drop-zone-container {
       color: $dark-color-theme;
-      border: dotted 2px $dark-color-theme;
+      //border: dotted 2px $dark-color-theme;
 
       .drop-zone {
         @include flex-box(column, center, center, true);
@@ -27,6 +27,12 @@
         input {
           display: none;
           visibility: hidden;
+        }
+
+        img{
+          display: block;
+          width: 80%;
+          height: 100%;
         }
         p {
           font-size: 16px;
@@ -45,6 +51,42 @@
             font-size: 16px;
             font-weight: 700;
           }
+        }
+      }
+
+    }
+
+    .algorithms-container{
+      @include flex-box(column, center, center, false);
+      box-sizing:border-box;
+      font-size: 16pt;
+      font-weight: 500;
+
+      .single-algorithm-container{
+        margin-top: 20px;
+        box-sizing: border-box;
+        padding: 8px;
+        background: $fresh-color;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 20px;
+        color:$light-color-theme;
+        transition: 0.7s ease;
+
+        &:hover{
+          background-color: lighten($fresh-color, 10);
+          color: darken(white, 10);
+        }
+
+        &:active{
+          background-color: darken($fresh-color, 10);
+          color: lighten(white, 10);
+        }
+
+        span{
+          display: block;
+          border-radius: 10px;
+
         }
       }
     }
