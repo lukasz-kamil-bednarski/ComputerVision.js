@@ -59,14 +59,14 @@
     .algorithms-container{
       @include flex-box(column, center, center, false);
       box-sizing:border-box;
-      font-size: 16pt;
+      font-size: 12pt;
       font-weight: 500;
 
       .single-algorithm-container{
         margin-top: 20px;
         box-sizing: border-box;
         padding: 8px;
-        background: $fresh-color;
+        background: $dark-color-theme;
         cursor: pointer;
         text-align: center;
         border-radius: 20px;

@@ -1,15 +1,22 @@
 import React from 'react';
+import ActionManager from '../logic/manager/Manager';
 
 class MainContent extends React.Component {
 
-    consumeAlgorithm = (event) =>{
-        console.log("consuming");
+    consumeAction = (event) =>{
+        event.preventDefault();
+
+        let algorithmID = event.dataTransfer.getData("text");
+
+        ActionManager.executeAction(algorithmID, this.canvas);
     };
+
     render(){
         return (
         <div className="main-content-container">
             <canvas ref={(canvas) => {this.canvas = canvas}}
-                    onDrop={this.consumeAlgorithm}
+                    onDragOver={(event)=> event.preventDefault()}
+                    onDrop={this.consumeAction}
                     width={800}
                     height={600}
                     id= "fun-canvas"

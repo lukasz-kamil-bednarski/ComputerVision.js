@@ -33,8 +33,8 @@ class ToolBox extends React.Component {
 
     };
 
-    chooseAlgorithm = (event) =>{
-      console.log("drag start")
+    dragAlgorithm = (event) =>{
+        event.dataTransfer.setData("text/plain", event.target.id);
     };
 
     render() {
@@ -62,11 +62,12 @@ class ToolBox extends React.Component {
 
                             return (category.map((concreteAlgorithm) => {
                                 return (
-                                    <div key={concreteAlgorithm.id}
+                                    <div id={concreteAlgorithm.id}
+                                         key={concreteAlgorithm.id}
                                          title={concreteAlgorithm.name}
                                          className="single-algorithm-container"
                                          draggable={true}
-                                         onDragStart={this.chooseAlgorithm}>
+                                         onDragStart={this.dragAlgorithm}>
                                         <span>{concreteAlgorithm.name.toUpperCase()}</span>
                                     </div>
                                 )
