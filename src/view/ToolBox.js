@@ -39,8 +39,11 @@ class ToolBox extends React.Component {
      * @param event
      */
     dragAction = (event) =>{
-        event.dataTransfer.clearData();
-        event.dataTransfer.setData("index/plain", event.target.id);
+
+        let transferData = {
+            actionID: event.target.id
+        };
+        event.dataTransfer.setData("text/plain", JSON.stringify(transferData));
     };
 
     onSetAction = (event) =>{

@@ -1,13 +1,24 @@
 import React from 'react';
 import ActionManager from '../logic/manager/Manager';
+import {connect} from 'react-redux';
+import UploadUtil from '../utils/UploadUtil';
 
 class MainContent extends React.Component {
 
     consumeAction = (event) =>{
         event.preventDefault();
+        let transferData = JSON.parse(event.dataTransfer.getData("text"));
 
-        let algorithmID = event.dataTransfer.getData("text");
-        ActionManager.executeAction(algorithmID, this.canvas);
+        if(transferData.actionID){
+            ActionManager.executeAction(transferData.actionID);
+        }
+
+        if(transferData.imgIndex){
+            const transferImage = this.props.images[parseInt(transferData.imgIndex)];
+            let testCanvas = document.createElement("canvas");
+            let imgData = UploadUtil.drawScaledImageOntoCanvas(transferImage, testCanvas).data;
+            ActionManager.executeAction(this.props.actionID, imgData);
+        }
         event.dataTransfer.clearData();
     };
 
@@ -25,10 +36,13 @@ class MainContent extends React.Component {
         );
     }
 
-    componentDidMount = () =>{
-        //console.log(this.canvas)
-    }
-
 }
 
-export default MainContent;
+const mapStateToProps = (state) => {
+    return {
+        images: state.imageGallery.images,
+        actionID: state.toolbox.actionID
+    }
+};
+
+export default connect(mapStateToProps) (MainContent);

@@ -59,8 +59,10 @@ class ImageGallery extends React.Component {
 
     onDragImage = (event) =>{
         event.persist();
-        const imgIndex = event.target.dataset.index;
-        event.dataTransfer.setData("text/plain", imgIndex);
+        const transferData = {
+          imgIndex: event.target.dataset.index
+        };
+        event.dataTransfer.setData("text/plain", JSON.stringify(transferData));
 
     };
 
