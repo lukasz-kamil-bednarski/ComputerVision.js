@@ -5,10 +5,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {createStore, combineReducers} from 'redux';
 import {imageGalleryReducer} from "./reducers/imageGalleryReducer";
+import {toolboxReducer} from "./reducers/toolboxReducer";
 import {Provider} from 'react-redux';
 
 const allReducers = combineReducers({
-    imageGallery: imageGalleryReducer
+    imageGallery: imageGalleryReducer,
+    toolbox: toolboxReducer
 });
 
 const store = createStore(allReducers);

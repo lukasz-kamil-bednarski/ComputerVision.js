@@ -7,8 +7,8 @@ class MainContent extends React.Component {
         event.preventDefault();
 
         let algorithmID = event.dataTransfer.getData("text");
-
         ActionManager.executeAction(algorithmID, this.canvas);
+        event.dataTransfer.clearData();
     };
 
     render(){

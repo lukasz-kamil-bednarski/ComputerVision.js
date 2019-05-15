@@ -2,6 +2,7 @@ import React from "react";
 import Dropzone from 'react-dropzone'
 import UploadUtil from '../utils/UploadUtil'
 import {addNewImage} from "../actions/imageGalleryActions";
+import {setAction} from "../actions/toolboxActions";
 import {connect} from 'react-redux';
 import {Settings} from "../settings/Settings";
 import dropLogo from "../assets/png/dropzone.png"
@@ -33,8 +34,20 @@ class ToolBox extends React.Component {
 
     };
 
-    dragAlgorithm = (event) =>{
-        event.dataTransfer.setData("text/plain", event.target.id);
+    /**
+     * Function calling on dragging an element from toolbox list
+     * @param event
+     */
+    dragAction = (event) =>{
+        event.dataTransfer.clearData();
+        event.dataTransfer.setData("index/plain", event.target.id);
+    };
+
+    onSetAction = (event) =>{
+
+        if(!event.target.draggable){
+            this.props.setAction(event.target.id);
+        }
     };
 
     render() {
@@ -66,24 +79,23 @@ class ToolBox extends React.Component {
                                          key={concreteAlgorithm.id}
                                          title={concreteAlgorithm.name}
                                          className="single-algorithm-container"
-                                         draggable={true}
-                                         onDragStart={this.dragAlgorithm}>
-                                        <span>{concreteAlgorithm.name.toUpperCase()}</span>
+                                         draggable={concreteAlgorithm.argumentNumber === 1}
+                                         onClick = {this.onSetAction}
+                                         onDragStart={this.dragAction}>
+                                        {concreteAlgorithm.name.toUpperCase()}
                                     </div>
                                 )
                             }))
                         })}
 
                     </div>
-
-                    {/*<div onDragStart={this.choose} style={{background:'red'}} draggable={true}>Test drag</div>*/}
-
-                    {/*<div id="target"onDrop={this.consume} style={{marginTop:'100px'}}>Drop Zone</div>*/}
                 </div>
 
                 <div onClick={triggerToolbox} className="toolbox-trigger">
                     <span>Toolbox</span>
                 </div>
+
+
             </div>
         )
     }
@@ -105,12 +117,15 @@ function triggerToolbox() {
 const mapStateToProps = state => {
 
     return {
-        imageGallery: state.imageGallery
+        imageGallery: state.imageGallery,
+        toolbox: state.toolbox
     }
 
 };
 const mapActionsToProps = {
-    addNewImage: addNewImage
+    addNewImage: addNewImage,
+    setAction: setAction
+
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(ToolBox);

@@ -75,7 +75,7 @@
 
         &:hover{
           background-color: lighten($fresh-color, 10);
-          color: darken(white, 10);
+          color: darken($dark-color-theme, 10);
         }
 
         &:active{

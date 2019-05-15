@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
 import 'bootstrap/scss/bootstrap.scss';
-import trash from '../assets/png/trash-circle.png';
+// import trash from '../assets/png/trash-circle.png';
 import {setMainImage} from "../actions/imageGalleryActions";
 import {deleteImage} from "../actions/imageGalleryActions";
 import UploadUtil from "../utils/UploadUtil";
@@ -14,11 +14,17 @@ class ImageGallery extends React.Component {
             className += "active"
         }
         return (
-            <div key={index} className="single-image-container"  onClick={() => this.setFunCanvasImage(index)}>
+            <div key={index}
+                 className="single-image-container"
+                 onClick={() => this.setFunCanvasImage(index)}>
                 {/*<div className="delete-image-container" onClick={(e)=>this.deleteImage(e, index)}>*/}
                     {/*<img width={40} height={40} src={trash}/>*/}
                 {/*</div>*/}
-                <img className={className} src={image.src}/>
+                <img className={className}
+                     draggable={true}
+                     onDragStart={this.onDragImage}
+                     data-index = {index}
+                     src={image.src}/>
             </div>
         )
     };
@@ -51,6 +57,13 @@ class ImageGallery extends React.Component {
         UploadUtil.drawScaledImageOntoCanvas(img, canvas);
     };
 
+    onDragImage = (event) =>{
+        event.persist();
+        const imgIndex = event.target.dataset.index;
+        event.dataTransfer.setData("text/plain", imgIndex);
+
+    };
+
     render() {
         return (
             <div className="image-gallery-container non-active">
@@ -62,6 +75,7 @@ class ImageGallery extends React.Component {
                     <div className="image-gallery-list">
                         {this.props.images.map(this.renderImageGallery).reverse()}
                     </div>
+
                 </div>
             </div>
         )
@@ -84,7 +98,8 @@ const mapStateToProps = state => {
 
     return {
         images: state.imageGallery.images,
-        mainImageIndex: state.imageGallery.mainImageIndex
+        mainImageIndex: state.imageGallery.mainImageIndex,
+        actionID: state.toolbox.actionID
     }
 };
 
