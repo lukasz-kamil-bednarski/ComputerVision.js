@@ -15,18 +15,22 @@ export default class ActionManager{
 
                 case '1':
                     modifiedImageData = operationManager.executeImageNegative(imageData);
-                    ctx.putImageData(modifiedImageData, 0,0);
-                    break;
+                    return;
 
                 case '2':
                     modifiedImageData = operationManager.executeImageAddition(imageData, additionalImageData);
-                    ctx.putImageData(modifiedImageData, 0,0);
                     break;
+                case '3':
+                    modifiedImageData = operationManager.executeImageSubtraction(imageData, additionalImageData);
+                    break;
+
                 default:
                     console.log("INTERNAL ERROR");
             }
         }catch (e) {
             alert(e);
+        }finally {
+            ctx.putImageData(modifiedImageData, 0,0);
         }
 
     }

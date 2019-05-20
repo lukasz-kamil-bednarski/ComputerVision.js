@@ -1,5 +1,13 @@
+import BasicOperationExecutor from "./BasicOperationExecutor";
+
 export default class BasicOperationManager {
 
+
+    /**
+     *
+     * @param imageDataObject
+     * @return {ImageData}
+     */
     executeImageNegative = (imageDataObject) => {
         let imageData = imageDataObject.data;
         const dataLength = imageData.length;
@@ -20,6 +28,13 @@ export default class BasicOperationManager {
         return new ImageData(new Uint8ClampedArray(modifiedImageData), imageDataObject.width, imageDataObject.height);
     };
 
+
+    /**
+     *
+     * @param leftImageData
+     * @param rightImageData
+     * @return {ImageData}
+     */
     executeImageAddition = (leftImageData, rightImageData) => {
 
         const leftImageDataArray = leftImageData.data;
@@ -33,12 +48,21 @@ export default class BasicOperationManager {
         let modifiedImageData = [];
         for (let i = 0; i < imagesLength; i = i + 4) {
 
-            const rgb = {
-                red: leftImageDataArray[i] + rightImageDataArray[i],
-                green:leftImageDataArray[i + 1] + rightImageDataArray[i + 1],
-                blue: leftImageDataArray[i + 2] + rightImageDataArray[i + 2],
-                alpha: leftImageDataArray[i + 3] + rightImageDataArray[i + 3]
+            const firstRGB = {
+                red: leftImageDataArray[i] ,
+                green:leftImageDataArray[i + 1],
+                blue: leftImageDataArray[i + 2] ,
+                alpha: leftImageDataArray[i + 3],
             };
+
+            const secondRGB = {
+                red: rightImageDataArray[i],
+                green: rightImageDataArray[i + 1],
+                blue: rightImageDataArray[i + 2],
+                alpha: rightImageDataArray[i + 3]
+            };
+
+            const rgb = BasicOperationExecutor.add(firstRGB, secondRGB);
             this.pushRGBObjectIntoArray(modifiedImageData, rgb);
         }
 
@@ -47,6 +71,48 @@ export default class BasicOperationManager {
         return new ImageData(outputModifiedImageDataArray, leftImageData.width, leftImageData.height);
     };
 
+
+    /**
+     *
+     * @param leftImageData
+     * @param rightImageData
+     * @return {ImageData}
+     */
+    executeImageSubtraction = (leftImageData, rightImageData) => {
+
+        const leftImageDataArray = leftImageData.data;
+        const rightImageDataArray= rightImageData.data;
+
+        if ((leftImageData.width !== rightImageData.width) || (leftImageData.height !== rightImageData.height)) {
+            throw "Wrong images' dimensions!";
+        }
+        const imagesLength = leftImageDataArray.length;
+
+        let modifiedImageData = [];
+        for (let i = 0; i < imagesLength; i = i + 4) {
+
+            const firstRGB = {
+                red: leftImageDataArray[i] ,
+                green:leftImageDataArray[i + 1],
+                blue: leftImageDataArray[i + 2] ,
+                alpha: leftImageDataArray[i + 3],
+            };
+
+            const secondRGB = {
+                red: rightImageDataArray[i],
+                green: rightImageDataArray[i + 1],
+                blue: rightImageDataArray[i + 2],
+                alpha: rightImageDataArray[i + 3]
+            };
+
+            const rgb = BasicOperationExecutor.subtract(firstRGB, secondRGB);
+            this.pushRGBObjectIntoArray(modifiedImageData, rgb);
+        }
+
+        let normalizedModifiedImageData = this.normalizeRGBArray(modifiedImageData);
+        let outputModifiedImageDataArray = new Uint8ClampedArray(normalizedModifiedImageData);
+        return new ImageData(outputModifiedImageDataArray, leftImageData.width, leftImageData.height);
+    };
 
     /**
      * Helper method decomposing a RGB object and pushing into an array
