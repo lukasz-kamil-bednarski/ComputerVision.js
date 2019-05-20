@@ -6,8 +6,15 @@ import {setAction} from "../actions/toolboxActions";
 import {connect} from 'react-redux';
 import {Settings} from "../settings/Settings";
 import dropLogo from "../assets/png/dropzone.png"
+import {findActionNameById} from "../settings/Settings";
 
 class ToolBox extends React.Component {
+
+
+    state = {
+        currentActionId:0,
+        currentActionName: 'None'
+    };
 
     addNewImage = (img) => {
         this.props.addNewImage(img);
@@ -50,7 +57,15 @@ class ToolBox extends React.Component {
 
         if(!event.target.draggable){
             this.props.setAction(event.target.id);
+            const newActionName = findActionNameById(event.target.id);
+            this.setState({
+                currentActionId: event.target.id,
+                currentActionName: newActionName
+            });
+
+            console.log(this.state.currentActionName)
         }
+
     };
 
     render() {
@@ -94,11 +109,14 @@ class ToolBox extends React.Component {
                     </div>
                 </div>
 
-                <div onClick={triggerToolbox} className="toolbox-trigger">
-                    <span>Toolbox</span>
+                <div className="additional-container">
+                    <div onClick={triggerToolbox} className="toolbox-trigger">
+                        <span>Toolbox</span>
+                    </div>
+                    <div className="info-container">
+                        <span>{this.state.currentActionName.toUpperCase()}</span>
+                    </div>
                 </div>
-
-
             </div>
         )
     }

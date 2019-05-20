@@ -29,7 +29,7 @@
           visibility: hidden;
         }
 
-        img{
+        img {
           display: block;
           width: 80%;
           height: 100%;
@@ -42,10 +42,9 @@
 
       @media screen and (max-width: $small-desktop-max-width) {
 
-        .drop-zone{
+        .drop-zone {
           width: 110px;
           height: 80px;
-
 
           p {
             font-size: 16px;
@@ -56,13 +55,13 @@
 
     }
 
-    .algorithms-container{
+    .algorithms-container {
       @include flex-box(column, center, center, false);
-      box-sizing:border-box;
+      box-sizing: border-box;
       font-size: 12pt;
       font-weight: 500;
 
-      .single-algorithm-container{
+      .single-algorithm-container {
         margin-top: 20px;
         box-sizing: border-box;
         padding: 8px;
@@ -70,55 +69,79 @@
         cursor: pointer;
         text-align: center;
         border-radius: 20px;
-        color:$light-color-theme;
+        color: $light-color-theme;
         transition: 0.7s ease;
 
-        &:hover{
+        &:hover {
           background-color: lighten($fresh-color, 10);
           color: darken($dark-color-theme, 10);
         }
 
-        &:active{
+        &:active {
           background-color: darken($fresh-color, 10);
           color: lighten(white, 10);
         }
 
-        span{
+        span {
           display: block;
           border-radius: 10px;
-
         }
       }
     }
   }
 
-  &.non-active{
-    @include translate-box(-$tool-box-container-width,0);
+  &.non-active {
+    @include translate-box(-$tool-box-container-width, 0);
   }
 
-  &.active{
-    @include translate-box(0,0);
+  &.active {
+    @include translate-box(0, 0);
   }
 
-  .toolbox-trigger{
-    background: $light-color-theme;
-    top: 0;
-    padding: 8px 15px 8px 15px;
-    border-bottom-right-radius: 20px;
-    cursor: pointer;
+  .additional-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    height: calc(100vh - #{$header-container-height});
 
-    span{
-      color: $dark-color-theme;
-      font-weight: 800;
-      display: block;
+    .toolbox-trigger {
+      background: $light-color-theme;
+      top: 0;
+      padding: 8px 15px 8px 15px;
+      border-bottom-right-radius: 20px;
+      cursor: pointer;
+      box-sizing: border-box;
+      max-width: 95px;
+      span {
+        color: $dark-color-theme;
+        font-weight: 800;
+        display: block;
+      }
+    }
+
+    .info-container{
+      padding: 8px 15px 8px 15px;
+      border-top-right-radius: 20px;
+      text-align: center;
+      background: $light-color-theme;
+      box-sizing: border-box;
+      font-size: 10pt;
+      span{
+        color: $dark-color-theme;
+        font-weight: 800;
+        display: block;
+
+      }
     }
   }
+
 }
 
+@media screen and (max-width: $mobile-threshold-width) {
 
-@media screen and (max-width: $mobile-threshold-width){
-
-  .toolbox-container{
+  .toolbox-container {
     display: none;
   }
 }
