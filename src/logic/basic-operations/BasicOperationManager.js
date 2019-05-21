@@ -1,4 +1,5 @@
 import BasicOperationExecutor from "./BasicOperationExecutor";
+import {LogicUtil} from '../../utils/LogicUtil'
 
 export default class BasicOperationManager {
 
@@ -63,10 +64,10 @@ export default class BasicOperationManager {
             };
 
             const rgb = BasicOperationExecutor.add(firstRGB, secondRGB);
-            this.pushRGBObjectIntoArray(modifiedImageData, rgb);
+            LogicUtil.pushRGBObjectIntoArray(modifiedImageData, rgb);
         }
 
-        let normalizedModifiedImageData = this.normalizeRGBArray(modifiedImageData);
+        let normalizedModifiedImageData = LogicUtil.normalizeRGBArray(modifiedImageData);
         let outputModifiedImageDataArray = new Uint8ClampedArray(normalizedModifiedImageData);
         return new ImageData(outputModifiedImageDataArray, leftImageData.width, leftImageData.height);
     };
@@ -106,47 +107,13 @@ export default class BasicOperationManager {
             };
 
             const rgb = BasicOperationExecutor.subtract(firstRGB, secondRGB);
-            this.pushRGBObjectIntoArray(modifiedImageData, rgb);
+            LogicUtil.pushRGBObjectIntoArray(modifiedImageData, rgb);
         }
 
-        let normalizedModifiedImageData = this.normalizeRGBArray(modifiedImageData);
+        let normalizedModifiedImageData = LogicUtil.normalizeRGBArray(modifiedImageData);
         let outputModifiedImageDataArray = new Uint8ClampedArray(normalizedModifiedImageData);
         return new ImageData(outputModifiedImageDataArray, leftImageData.width, leftImageData.height);
     };
-
-    /**
-     * Helper method decomposing a RGB object and pushing into an array
-     * @param outputArray
-     * @param rgbObject
-     */
-    pushRGBObjectIntoArray = (outputArray, rgbObject) =>{
-        for(let prop in rgbObject){
-            if(rgbObject.hasOwnProperty(prop)){
-                outputArray.push(rgbObject[prop]);
-            }
-        }
-    };
-
-    findArrayMax=(arr) =>{
-        let max = 0;
-        for(let num of arr){
-            if(num > max){
-                max = num;
-            }
-        }
-        return max;
-    };
-
-    normalizeRGBArray = (arr) =>{
-        const max = this.findArrayMax(arr);
-        const length = arr.length;
-
-        for(let i=0; i < length; i++){
-            arr[i] = (arr[i]/max) * 255;
-        }
-
-        return arr;
-    }
 
 
 }

@@ -33,6 +33,21 @@ export const SETTINGS = {
                 type: 'basic',
                 argumentNumber: 2,
                 isParametrized: true
+            },
+
+            {
+                id: 5,
+                name: 'gaussian filter',
+                type:'filter',
+                argumentNumber:1,
+                isParametrized: true
+            },
+            {
+                id: 6,
+                name: 'sobel filter',
+                type:'filter',
+                argumentNumber:1,
+                isParametrized: true
             }
         ]
     ],

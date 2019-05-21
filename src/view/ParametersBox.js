@@ -6,7 +6,13 @@ class ParametersBox extends React.Component{
 
     toggleParametersBox = (e) =>{
         e.persist();
-        e.target.parentNode.parentNode.classList.add('active')
+        console.log([2,3,].includes(2));
+        if(e.target.parentNode.parentNode.classList.contains('active')){
+            e.target.parentNode.parentNode.classList.remove('active')
+        }else{
+            e.target.parentNode.parentNode.classList.add('active')
+        }
+
     };
 
     render(){
@@ -17,6 +23,10 @@ class ParametersBox extends React.Component{
                     <div onClick={this.toggleParametersBox} className="parameters-header">
                         Parameters
                     </div>
+                </div>
+
+                <div onClick={this.toggleParametersBox} className="parameters-remove-container">
+                    <span>X</span>
                 </div>
 
                 <div className="parameters-list">
