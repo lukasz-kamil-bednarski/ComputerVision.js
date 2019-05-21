@@ -5,11 +5,11 @@ import ToolBox from "./view/ToolBox";
 import ImageGallery from "./view/ImageGallery";
 import MainContent from "./view/MainContent";
 import {connect} from 'react-redux';
+import ParametersBox from './view/ParametersBox'
 
 class App extends React.Component {
 
   render(){
-      //console.log(this.props);
       return (
           <div className="root">
               <header>
@@ -20,6 +20,7 @@ class App extends React.Component {
                   <div className="content-container">
                         <ToolBox/>
                         <MainContent/>
+                        <ParametersBox/>
                         <ImageGallery/>
                   </div>
               </main>

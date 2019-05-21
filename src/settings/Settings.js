@@ -1,4 +1,4 @@
-export const Settings = {
+export const SETTINGS = {
     funCanvasDesktopSize: {
         width: 1200,
         height: 800
@@ -35,14 +35,26 @@ export const Settings = {
                 isParametrized: true
             }
         ]
-    ]
+    ],
+
+    parameters:
+        [
+            {
+                id:1,
+                name:'linear-combination-parameter',
+                type:'range',
+                min:0,
+                max:1
+            },
+
+        ]
 };
 
 export const findActionNameById = (id) => {
-    for (let action of Settings.algorithms[0]) {
-       if(action.id === parseInt(id)){
-           return action.name;
-       }
+    for (let action of SETTINGS.algorithms[0]) {
+        if (action.id === parseInt(id)) {
+            return action.name;
+        }
     }
     return 'None';
 };

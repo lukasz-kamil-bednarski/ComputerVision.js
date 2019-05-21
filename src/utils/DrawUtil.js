@@ -1,6 +1,6 @@
-import {Settings} from '../settings/Settings'
+import {SETTINGS} from '../settings/Settings'
 
-export default class UploadUtil {
+export default class DrawUtil {
 
     /**
      * Method responsible for handling image input from file.
@@ -37,8 +37,8 @@ export default class UploadUtil {
         if(ctx !== null) {
 
 
-            const width = Settings.funCanvasDesktopSize.width;
-            const height = Settings.funCanvasDesktopSize.height;
+            const width = SETTINGS.funCanvasDesktopSize.width;
+            const height = SETTINGS.funCanvasDesktopSize.height;
 
             ctx.canvas.width = width;
             ctx.canvas.height = height; //restoring default values

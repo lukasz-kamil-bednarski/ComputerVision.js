@@ -1,10 +1,10 @@
 import React from "react";
 import Dropzone from 'react-dropzone'
-import UploadUtil from '../utils/UploadUtil'
+import DrawUtil from '../utils/DrawUtil'
 import {addNewImage} from "../actions/imageGalleryActions";
 import {setAction} from "../actions/toolboxActions";
 import {connect} from 'react-redux';
-import {Settings} from "../settings/Settings";
+import {SETTINGS} from "../settings/Settings";
 import dropLogo from "../assets/png/dropzone.png"
 import {findActionNameById} from "../settings/Settings";
 
@@ -33,7 +33,7 @@ class ToolBox extends React.Component {
 
             img.onload = () => {
                 URL.revokeObjectURL(img.src);
-                UploadUtil.drawScaledImageOntoCanvas(img, canvas);
+                DrawUtil.drawScaledImageOntoCanvas(img, canvas);
             };
             img.src = url;
             this.addNewImage(img);
@@ -70,7 +70,7 @@ class ToolBox extends React.Component {
 
     render() {
 
-        const algorithms = Settings.algorithms;
+        const algorithms = SETTINGS.algorithms;
 
         return (
             <div className="toolbox-container non-active">

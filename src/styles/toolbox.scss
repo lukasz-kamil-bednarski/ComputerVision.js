@@ -6,7 +6,7 @@
   background: transparent;
   position: absolute;
   transition: 0.7s ease;
-  z-index: 100;
+  z-index: 300;
 
   .toolbox-content {
     @include flex-box(column, flex-start, center, false);

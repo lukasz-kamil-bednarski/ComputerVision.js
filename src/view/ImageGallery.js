@@ -4,7 +4,7 @@ import 'bootstrap/scss/bootstrap.scss';
 // import trash from '../assets/png/trash-circle.png';
 import {setMainImage} from "../actions/imageGalleryActions";
 import {deleteImage} from "../actions/imageGalleryActions";
-import UploadUtil from "../utils/UploadUtil";
+import DrawUtil from "../utils/DrawUtil";
 
 class ImageGallery extends React.Component {
 
@@ -54,7 +54,7 @@ class ImageGallery extends React.Component {
     drawMainImage = (newIndex) => {
         let img = this.props.images[newIndex];
         let canvas = document.getElementById("fun-canvas");
-        UploadUtil.drawScaledImageOntoCanvas(img, canvas);
+        DrawUtil.drawScaledImageOntoCanvas(img, canvas);
     };
 
     onDragImage = (event) =>{
