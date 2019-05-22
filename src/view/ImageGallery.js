@@ -20,7 +20,7 @@ class ImageGallery extends React.Component {
                 {/*<div className="delete-image-container" onClick={(e)=>this.deleteImage(e, index)}>*/}
                     {/*<img width={40} height={40} src={trash}/>*/}
                 {/*</div>*/}
-                <img className={className}
+                <img alt={'input'} className={className}
                      draggable={true}
                      onDragStart={this.onDragImage}
                      data-index = {index}

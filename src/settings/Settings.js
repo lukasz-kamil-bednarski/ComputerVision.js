@@ -59,7 +59,8 @@ export const SETTINGS = {
                 name:'linear-combination-parameter',
                 type:'range',
                 min:0,
-                max:1
+                max:1,
+                step:0.01
             },
 
         ]

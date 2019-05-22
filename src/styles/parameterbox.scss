@@ -7,9 +7,10 @@
   background-color: transparent;
   position: absolute;
   box-sizing: border-box;
-  @include translate-box(0, calc(100vh - #{$header-container-height} - 35px));
+  //@include translate-box(0, calc(100vh - #{$header-container-height} - 35px));
   transition: 0.9s ease;
   z-index: 250;
+  opacity: 0.8;
 
   .parameters-header-container {
     width: 100%;
@@ -41,11 +42,15 @@
     }
   }
   &.active {
-    @include translate-box(0, 0);
+    @include translate-box(0, -35px);
 
     .parameters-header {
       display: none;
       transition: 0.5s ease;
+    }
+
+    .parameters-remove-container{
+      visibility: visible;
     }
   }
 
@@ -54,7 +59,7 @@
     width: 50px;
     height: 50px;
     position: absolute;
-    right: 60px;
+    right: 100px;
     top:60px;
     font-size: 25pt;
     font-weight: 500;
@@ -62,6 +67,7 @@
     vertical-align: center;
     border-radius: 10px;
     transition: 0.6s ease;
+    visibility: hidden;
 
     span{
       cursor: pointer;
@@ -79,8 +85,30 @@
   }
 
   .parameters-list {
-    height: calc(100vh - 35px - #{$header-container-height});
+    height: calc(100vh - #{$header-container-height});
     width: 100%;
     background-color: $dark-color-theme;
+    box-sizing: border-box;
+    @include flex-box(row, center, flex-start, true);
+
+    .single-parameter-container{
+      width: auto;
+      background-color: transparent;
+      color:$light-color-theme;
+      padding: 12px;
+      margin-top: 10px;
+      @include flex-box(column, center, center, true);
+
+      span{
+        margin: 15px;
+        font-size: 16pt;
+        font-weight: 500;
+
+
+      }
+      input[type=range]{
+        width: 700px;
+      }
+    }
   }
 }

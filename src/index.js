@@ -6,11 +6,14 @@ import * as serviceWorker from './serviceWorker';
 import {createStore, combineReducers} from 'redux';
 import {imageGalleryReducer} from "./reducers/imageGalleryReducer";
 import {toolboxReducer} from "./reducers/toolboxReducer";
+import {parametersReducer} from './reducers/parametersReducer';
+
 import {Provider} from 'react-redux';
 
 const allReducers = combineReducers({
     imageGallery: imageGalleryReducer,
-    toolbox: toolboxReducer
+    toolbox: toolboxReducer,
+    parameters: parametersReducer
 });
 
 const store = createStore(allReducers);
