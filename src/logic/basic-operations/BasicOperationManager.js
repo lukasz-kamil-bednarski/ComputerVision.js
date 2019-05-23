@@ -145,8 +145,7 @@ export default class BasicOperationManager {
             LogicUtil.pushRGBObjectIntoArray(modifiedImageData, rgb);
         }
 
-        let normalizedModifiedImageData = LogicUtil.normalizeRGBArray(modifiedImageData);
-        let outputModifiedImageDataArray = new Uint8ClampedArray(normalizedModifiedImageData);
+        let outputModifiedImageDataArray = new Uint8ClampedArray(modifiedImageData);
         return new ImageData(outputModifiedImageDataArray, leftImageData.width, leftImageData.height);
     };
 
