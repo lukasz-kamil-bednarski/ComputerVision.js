@@ -62,8 +62,6 @@ class ToolBox extends React.Component {
                 currentActionId: event.target.id,
                 currentActionName: newActionName
             });
-
-            console.log(this.state.currentActionName)
         }
 
     };
