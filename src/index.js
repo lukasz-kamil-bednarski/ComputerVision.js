@@ -16,7 +16,7 @@ const allReducers = combineReducers({
     parameters: parametersReducer
 });
 
-const store = createStore(allReducers);
+export const store = createStore(allReducers);
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 

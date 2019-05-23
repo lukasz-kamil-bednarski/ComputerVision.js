@@ -18,7 +18,14 @@ export default class BasicOperationExecutor{
         };
     }
 
-    combineLinear(parameter){}
+    static combineLinear(firstRGB, secondRGB,parameter){
+        return {
+            red: parameter*firstRGB.red + (1-parameter)*secondRGB.red,
+            green: parameter*firstRGB.green + (1-parameter)*secondRGB.green,
+            blue: parameter* firstRGB.blue +(1-parameter)*secondRGB.blue,
+            alpha: firstRGB.alpha + secondRGB.alpha
+        };
+    }
 
     negative(){
 

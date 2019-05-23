@@ -7,7 +7,7 @@
   background-color: transparent;
   position: absolute;
   box-sizing: border-box;
-  //@include translate-box(0, calc(100vh - #{$header-container-height} - 35px));
+  @include translate-box(0, calc(100vh - #{$header-container-height} - 35px));
   transition: 0.9s ease;
   z-index: 250;
   opacity: 0.8;
@@ -97,6 +97,7 @@
       color:$light-color-theme;
       padding: 12px;
       margin-top: 10px;
+      opacity: 1;
       @include flex-box(column, center, center, true);
 
       span{

@@ -4,18 +4,18 @@ import {deleteImage, setMainImage} from "../actions/imageGalleryActions";
 import {connect} from 'react-redux';
 import {setParameters} from "../actions/parametersAction";
 
-class ParametersBox extends React.Component{
+class ParametersBox extends React.Component {
 
 
     /**
      * Method is responsible for turning parameter mode
      * @param e
      */
-    toggleParametersBox = (e) =>{
+    toggleParametersBox = (e) => {
         e.persist();
-        if(e.target.parentNode.parentNode.classList.contains('active')){
+        if (e.target.parentNode.parentNode.classList.contains('active')) {
             e.target.parentNode.parentNode.classList.remove('active')
-        }else{
+        } else {
             e.target.parentNode.parentNode.classList.add('active')
         }
 
@@ -23,35 +23,35 @@ class ParametersBox extends React.Component{
 
 
     onSetParameters = (event) => {
-       this.onSetParameters(
-           {
-               linearCombinationParameter: event.target.value
-           }
-       );
+        let val = event.target.value;
+        this.props.setParameters(
+            {
+                linearCombinationParameter: val
+            }
+        );
     };
 
 
-    renderParameters = (parameter) =>{
+    renderParameters = (parameter) => {
         switch (parameter.name) {
             case 'linear-combination-parameter':
-              return(
-               <div key={parameter.name} className="single-parameter-container">
-                   <span>{(this.props).parameters.linearCombinationParameter}</span>
-                   <input min={parameter.min}
-                          max={parameter.max}
-                          step={parameter.step}
-                          onChange={this.onSetParameters}
-                          type={parameter.type}/>
-                   <span>{parameter.name}</span>
-               </div>
-              );
+                return (
+                    <div key={parameter.name} className="single-parameter-container">
+                        <span>{this.props.parameters.linearCombinationParameter}</span>
+                        <input min={parameter.min}
+                               max={parameter.max}
+                               step={parameter.step}
+                               onChange={this.onSetParameters}
+                               type={parameter.type}/>
+                        <span>{parameter.name}</span>
+                    </div>
+                );
             default:
                 return null;
         }
     };
 
-    render(){
-        console.log(this.props.parameters);
+    render() {
         return (
             <div className="parameters-container">
 

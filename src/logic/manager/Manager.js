@@ -1,6 +1,7 @@
 import BasicOperationManager from '../basic-operations/BasicOperationManager';
+import {store} from '../../index';
 
-export default class ActionManager{
+class ActionManager{
 
 
     static executeAction(actionID, additionalImageData = null){
@@ -9,6 +10,8 @@ export default class ActionManager{
         const imageData = ctx.getImageData(0,0, ctx.canvas.width, ctx.canvas.height);
         const operationManager = new BasicOperationManager();
         let modifiedImageData;
+
+        const parameters = store.getState().parameters;
 
         try {
             switch (actionID) {
@@ -24,8 +27,13 @@ export default class ActionManager{
                     modifiedImageData = operationManager.executeImageSubtraction(imageData, additionalImageData);
                     break;
 
+                case '4':
+                    const linearCombinationParameter = parameters.linearCombinationParameter;
+                    modifiedImageData = operationManager.executeImageLinearCombination(imageData, additionalImageData, linearCombinationParameter);
+                    break;
                 default:
                     console.log("INTERNAL ERROR");
+                    return;
             }
         }catch (e) {
             alert(e);
@@ -35,3 +43,5 @@ export default class ActionManager{
 
     }
 }
+
+export default ActionManager;

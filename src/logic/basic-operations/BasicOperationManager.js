@@ -115,5 +115,41 @@ export default class BasicOperationManager {
         return new ImageData(outputModifiedImageDataArray, leftImageData.width, leftImageData.height);
     };
 
+    executeImageLinearCombination = (leftImageData, rightImageData, parameter) => {
+
+        const leftImageDataArray = leftImageData.data;
+        const rightImageDataArray= rightImageData.data;
+
+        if ((leftImageData.width !== rightImageData.width) || (leftImageData.height !== rightImageData.height)) {
+            throw "Wrong images' dimensions!";
+        }
+        const imagesLength = leftImageDataArray.length;
+        let modifiedImageData = [];
+        for (let i = 0; i < imagesLength; i = i + 4) {
+
+            const firstRGB = {
+                red: leftImageDataArray[i] ,
+                green:leftImageDataArray[i + 1],
+                blue: leftImageDataArray[i + 2] ,
+                alpha: leftImageDataArray[i + 3],
+            };
+
+            const secondRGB = {
+                red: rightImageDataArray[i],
+                green: rightImageDataArray[i + 1],
+                blue: rightImageDataArray[i + 2],
+                alpha: rightImageDataArray[i + 3]
+            };
+
+            const rgb = BasicOperationExecutor.combineLinear(firstRGB, secondRGB, parameter);
+            LogicUtil.pushRGBObjectIntoArray(modifiedImageData, rgb);
+        }
+
+        let normalizedModifiedImageData = LogicUtil.normalizeRGBArray(modifiedImageData);
+        let outputModifiedImageDataArray = new Uint8ClampedArray(normalizedModifiedImageData);
+        return new ImageData(outputModifiedImageDataArray, leftImageData.width, leftImageData.height);
+    };
+
+
 
 }

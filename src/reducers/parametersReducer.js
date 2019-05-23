@@ -5,7 +5,7 @@ export function parametersReducer(state = {linearCombinationParameter: 0.5}, act
         case SET_PARAMETERS:
             return{
                 ...state,
-                actionID: action.payload
+                linearCombinationParameter: action.payload.linearCombinationParameter
             };
 
         default:
