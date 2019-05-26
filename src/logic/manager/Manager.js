@@ -1,5 +1,6 @@
 import BasicOperationManager from '../basic-operations/BasicOperationManager';
 import {store} from '../../index';
+import {LogicUtil} from "../../utils/LogicUtil";
 
 class ActionManager{
 
@@ -31,6 +32,11 @@ class ActionManager{
                     const linearCombinationParameter = parameters.linearCombinationParameter;
                     modifiedImageData = operationManager.executeImageLinearCombination(imageData, additionalImageData, linearCombinationParameter);
                     break;
+                case '5':
+                    console.log("GAUSS");
+                    let a =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
+                    console.log(a);
+                    return;
                 default:
                     console.log("INTERNAL ERROR");
                     return;

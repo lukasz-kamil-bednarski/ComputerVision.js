@@ -73,6 +73,10 @@ class ToolBox extends React.Component {
         return (
             <div className="toolbox-container non-active">
                 <div className="toolbox-content">
+                    <div className="input-file-container">
+                        <label htmlFor="file-picker">Choose a file</label>
+                        <input id="file-picker" style={{display:'none'}} type="file"/>
+                    </div>
                     <div className="drop-zone-container">
                         <Dropzone onDrop={acceptedFiles => this.drawDroppedImage(acceptedFiles)}>
                             {({getRootProps, getInputProps}) => (

@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.scss';
-import {Header} from "./view/Header";
-import ToolBox from "./view/ToolBox";
-import ImageGallery from "./view/ImageGallery";
-import MainContent from "./view/MainContent";
+import {Header} from "./components/Header";
+import ToolBox from "./components/ToolBox";
+import ImageGallery from "./components/ImageGallery";
+import MainContent from "./components/MainContent";
 import {connect} from 'react-redux';
-import ParametersBox from './view/ParametersBox'
+import ParametersBox from './components/ParametersBox'
 
 class App extends React.Component {
 
