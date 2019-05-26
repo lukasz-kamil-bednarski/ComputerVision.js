@@ -1,6 +1,7 @@
 import BasicOperationManager from '../basic-operations/BasicOperationManager';
 import {store} from '../../index';
 import {LogicUtil} from "../../utils/LogicUtil";
+import ContextOperationManager from "../context-operations/ContextOperationManager";
 
 class ActionManager{
 
@@ -34,8 +35,9 @@ class ActionManager{
                     break;
                 case '5':
                     console.log("GAUSS");
-                    let a =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
-                    console.log(a);
+                    let matrix =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
+                    const kernel = [[1,0,1], [0,1,0], [1,0,1]];
+                    ContextOperationManager.executeImageConvolution(matrix, kernel);
                     return;
                 default:
                     console.log("INTERNAL ERROR");
@@ -44,7 +46,7 @@ class ActionManager{
         }catch (e) {
             alert(e);
         }finally {
-            ctx.putImageData(modifiedImageData, 0,0);
+            //ctx.putImageData(modifiedImageData, 0,0);
         }
 
     }
