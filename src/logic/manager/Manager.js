@@ -34,7 +34,6 @@ class ActionManager{
                     modifiedImageData = operationManager.executeImageLinearCombination(imageData, additionalImageData, linearCombinationParameter);
                     break;
                 case '5':
-                    console.log("GAUSS");
                     let matrix =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
                     const kernel = [[1,0,1], [0,1,0], [1,0,1]];
                     ContextOperationManager.executeImageConvolution(matrix, kernel);
