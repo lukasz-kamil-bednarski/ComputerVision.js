@@ -35,7 +35,7 @@ class ActionManager{
                     break;
                 case '5':
                     let matrix =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
-                    const kernel = [[1,1,1], [1,1,1], [1,1,1]];
+                    const kernel = [[-1,-1,-1], [-1,9,-1], [-1,-1,-1]];
                     modifiedImageData = ContextOperationManager.executeImageConvolution(matrix, kernel);
                     return;
                 default:

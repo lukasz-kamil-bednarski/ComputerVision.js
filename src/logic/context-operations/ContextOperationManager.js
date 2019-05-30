@@ -32,7 +32,7 @@ class ContextOperationManager {
                 }
             }
         }
-        const unzippedDataArray = new Uint8ClampedArray(LogicUtil.unzipPixelMatrixIntoImageData(newImageMatrix));
+        const unzippedDataArray = new Uint8ClampedArray(LogicUtil.normalizeRGBArray(LogicUtil.unzipPixelMatrixIntoImageData(newImageMatrix)));
         return new ImageData(unzippedDataArray, width, height);
     };
 
@@ -42,22 +42,20 @@ class ContextOperationManager {
         let greenAccumulator = 0;
         let blueAccumulator = 0;
         const kernelDimension = 3;
-        const kernelDimensionSurface = Math.pow(kernelDimension, 2) - 1;
+        const kernelDimensionSurface = Math.pow(kernelDimension, 2);
+        const noneOpacityValue = 255;
 
         for (let i = 0; i < context.length; i++) {
 
             for (let j = 0; j < context[i].length; j++) {
-                if (!(i === j && i === Math.floor(kernelDimension / 2))) {
-                    const pixel = {
-                        redChannel: context[i][j].redChannel,
-                        greenChannel: context[i][j].greenChannel,
-                        blueChannel: context[i][j].blueChannel
-                    };
-
-                    redAccumulator += pixel.redChannel * kernel[i][j];
-                    greenAccumulator += pixel.greenChannel * kernel[i][j];
-                    blueAccumulator += pixel.blueChannel * kernel[i][j];
-                }
+                const pixel = {
+                    redChannel: context[i][j].redChannel,
+                    greenChannel: context[i][j].greenChannel,
+                    blueChannel: context[i][j].blueChannel
+                };
+                redAccumulator += pixel.redChannel * kernel[i][j];
+                greenAccumulator += pixel.greenChannel * kernel[i][j];
+                blueAccumulator += pixel.blueChannel * kernel[i][j];
             }
         }
         redAccumulator /= kernelDimensionSurface;
@@ -68,7 +66,7 @@ class ContextOperationManager {
             redChannel: redAccumulator,
             greenChannel: greenAccumulator,
             blueChannel: blueAccumulator,
-            alphaChannel: 255
+            alphaChannel: noneOpacityValue
         }
     }
 
