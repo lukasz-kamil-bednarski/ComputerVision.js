@@ -35,8 +35,8 @@ class ActionManager{
                     break;
                 case '5':
                     let matrix =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
-                    const kernel = [[1,0,1], [0,1,0], [1,0,1]];
-                    ContextOperationManager.executeImageConvolution(matrix, kernel);
+                    const kernel = [[1,1,1], [1,1,1], [1,1,1]];
+                    modifiedImageData = ContextOperationManager.executeImageConvolution(matrix, kernel);
                     return;
                 default:
                     console.log("INTERNAL ERROR");
@@ -45,7 +45,7 @@ class ActionManager{
         }catch (e) {
             alert(e);
         }finally {
-            //ctx.putImageData(modifiedImageData, 0,0);
+           // ctx.putImageData(modifiedImageData, 0,0);
         }
 
     }

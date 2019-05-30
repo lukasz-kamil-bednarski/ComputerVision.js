@@ -12,6 +12,11 @@ export class LogicUtil{
         }
     };
 
+    /**
+     * Method finding a maximal element in an array
+     * @param arr
+     * @returns {number}
+     */
     static findArrayMax=(arr) =>{
         let max = 0;
         for(let num of arr){
@@ -22,6 +27,12 @@ export class LogicUtil{
         return max;
     };
 
+
+    /**
+     * Normalizing an array into [0-255] range
+     * @param arr
+     * @returns {*}
+     */
     static normalizeRGBArray = (arr) =>{
         const max = LogicUtil.findArrayMax(arr);
         const length = arr.length;
@@ -72,6 +83,11 @@ export class LogicUtil{
         return outputPixelMatrix;
     }
 
+    /**
+     * Converting input: ImageData(sequence of numbers) object into an array of objects(pixel objects)
+     * @param rawImageData
+     * @returns {Array}
+     */
     static zipImageDataIntoPixelArray = (rawImageData) => {
 
 
@@ -90,4 +106,24 @@ export class LogicUtil{
         }
         return outputImageData;
     };
+
+    static unzipPixelMatrixIntoImageData = (pixelMatrix) =>{
+        const height = pixelMatrix.length;
+        const width = pixelMatrix[0].length;
+
+        let imageDataArray = [];
+        if(width > 0 && height > 0){
+            for(let row = 0; row<height; row++){
+                for(let column = 0; column<height; column++){
+
+                    const pixel = pixelMatrix[row][column];
+                    imageDataArray.push(pixel.redChannel);
+                    imageDataArray.push(pixel.greenChannel);
+                    imageDataArray.push(pixel.blueChannel);
+                    imageDataArray.push(pixel.alphaChannel);
+                }
+            }
+        }
+        return imageDataArray;
+    }
 }

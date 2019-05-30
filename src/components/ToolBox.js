@@ -63,7 +63,15 @@ class ToolBox extends React.Component {
                 currentActionName: newActionName
             });
         }
+    };
 
+    /**
+     * Method handling file input by picking a file from a directory
+     * @param event
+     */
+    handleFileInput = (event) =>{
+        let files = event.target.files;
+        this.drawDroppedImage(files);
     };
 
     render() {
@@ -75,14 +83,14 @@ class ToolBox extends React.Component {
                 <div className="toolbox-content">
                     <div className="input-file-container">
                         <label htmlFor="file-picker">Choose a file</label>
-                        <input id="file-picker" style={{display:'none'}} type="file"/>
+                        <input onChange={this.handleFileInput} id="file-picker" style={{display:'none'}} type="file"/>
                     </div>
                     <div className="drop-zone-container">
                         <Dropzone onDrop={acceptedFiles => this.drawDroppedImage(acceptedFiles)}>
                             {({getRootProps, getInputProps}) => (
                                 <section>
                                     <div className="drop-zone" {...getRootProps()}>
-                                        <input/>
+                                        <input />
                                         <img src={dropLogo} alt="drop-logo"/>
                                     </div>
                                 </section>
