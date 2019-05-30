@@ -109,13 +109,11 @@ export class LogicUtil{
 
     static unzipPixelMatrixIntoImageData = (pixelMatrix) =>{
         const height = pixelMatrix.length;
-        const width = pixelMatrix[0].length;
-
+        const width = pixelMatrix[0].length === pixelMatrix[height - 1].length ? pixelMatrix[0].length : null;
         let imageDataArray = [];
         if(width > 0 && height > 0){
-            for(let row = 0; row<height; row++){
-                for(let column = 0; column<height; column++){
-
+            for(let row=0;row<height;row++){
+                for(let column=0;column<width;column++){
                     const pixel = pixelMatrix[row][column];
                     imageDataArray.push(pixel.redChannel);
                     imageDataArray.push(pixel.greenChannel);

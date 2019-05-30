@@ -6,7 +6,6 @@ class ContextOperationManager {
 
         const height = imageMatrix.length;
         const width = imageMatrix[0].length === imageMatrix[height - 1].length ? imageMatrix[0].length : null;
-        console.log(width);
         let newImageMatrix = imageMatrix.slice(0);
         if (height > 0 && width > 0) {
 
@@ -33,8 +32,8 @@ class ContextOperationManager {
                 }
             }
         }
-        const unzippeDataArray = new Uint8ClampedArray(LogicUtil.unzipPixelMatrixIntoImageData(newImageMatrix));
-        return new ImageData(unzippeDataArray, width, height);
+        const unzippedDataArray = new Uint8ClampedArray(LogicUtil.unzipPixelMatrixIntoImageData(newImageMatrix));
+        return new ImageData(unzippedDataArray, width, height);
     };
 
 
@@ -43,13 +42,12 @@ class ContextOperationManager {
         let greenAccumulator = 0;
         let blueAccumulator = 0;
         const kernelDimension = 3;
-        const kernelDimensionSurface = Math.pow(kernelDimension, 2);
+        const kernelDimensionSurface = Math.pow(kernelDimension, 2) - 1;
 
         for (let i = 0; i < context.length; i++) {
 
             for (let j = 0; j < context[i].length; j++) {
-
-                // if (!(i === j && i === Math.floor(kernelDimension / 2))) {
+                if (!(i === j && i === Math.floor(kernelDimension / 2))) {
                     const pixel = {
                         redChannel: context[i][j].redChannel,
                         greenChannel: context[i][j].greenChannel,
@@ -59,7 +57,7 @@ class ContextOperationManager {
                     redAccumulator += pixel.redChannel * kernel[i][j];
                     greenAccumulator += pixel.greenChannel * kernel[i][j];
                     blueAccumulator += pixel.blueChannel * kernel[i][j];
-               // }
+                }
             }
         }
         redAccumulator /= kernelDimensionSurface;

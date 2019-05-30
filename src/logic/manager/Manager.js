@@ -45,7 +45,7 @@ class ActionManager{
         }catch (e) {
             alert(e);
         }finally {
-           // ctx.putImageData(modifiedImageData, 0,0);
+            ctx.putImageData(modifiedImageData, 0,0);
         }
 
     }
