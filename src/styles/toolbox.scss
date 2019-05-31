@@ -15,10 +15,48 @@
     padding: 30px 10px 30px 10px;
     background: $tool-box-container-bg;
     height: calc(100vh - #{$header-container-height});
+    overflow-y:auto;
+
+    .input-file-container{
+      background: $fresh-color;
+      font-weight: 500;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      label{
+        display: block;
+        color:$dark-color-theme;
+        margin:auto;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 8px;
+        cursor: pointer;
+        transition: 0.7s ease;
+      }
+
+      &:hover{
+        label{
+          color:$light-color-theme;
+        }
+      }
+    }
+
+    .drop-zone-label{
+      color:darken($silver-color-theme, 70%);
+      font-weight: 600;
+      font-size: 10pt;
+      display: block;
+      padding: 8px;
+      box-sizing: border-box;
+      opacity: 0.5;
+
+    }
 
     .drop-zone-container {
       color: $dark-color-theme;
-      //border: dotted 2px $dark-color-theme;
+      border: dashed 2px $silver-color-theme;
+      box-sizing: border-box;
+
 
       .drop-zone {
         @include flex-box(column, center, center, true);
@@ -71,7 +109,15 @@
         border-radius: 20px;
         color: $light-color-theme;
         transition: 0.7s ease;
+        font-size: 0.9em;
+        @include flex-box(row, center, center, false);
 
+        &.draggable{
+          cursor:grab;
+          &:active{
+            cursor:grabbing;
+          }
+        }
         &:hover {
           background-color: lighten($fresh-color, 10);
           color: darken($dark-color-theme, 10);
@@ -82,6 +128,14 @@
           color: lighten(white, 10);
         }
 
+        .draggable-logo-container{
+          box-sizing: border-box;
+          margin-left: 2px;
+          img{
+            width: 20px;
+            height: 20px;
+          }
+        }
         span {
           display: block;
           border-radius: 10px;

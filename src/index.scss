@@ -21,6 +21,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  cursor: url(assets/cur/cursor.cur) pointer;
 
 
 }
@@ -55,11 +56,16 @@ code {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: $dark-color-theme;
-  border-radius: 10px
+  background: $fresh-color;
+  border-radius: 10px;
+  transition: 0.7s ease;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #111111;
+  background: darken($fresh-color, 15%);
+}
+
+::selection{
+  background: $fresh-color;
 }

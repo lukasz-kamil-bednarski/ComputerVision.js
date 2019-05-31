@@ -40,15 +40,23 @@ export const SETTINGS = {
                 name: 'gaussian filter',
                 type:'filter',
                 argumentNumber:1,
-                isParametrized: true
+                isParametrized: true,
+
             },
             {
                 id: 6,
-                name: 'sobel filter',
+                name: 'laplacian filter',
                 type:'filter',
                 argumentNumber:1,
                 isParametrized: true
-            }
+            },
+            {
+                id: 7,
+                name: 'own filter',
+                type:'filter',
+                argumentNumber:1,
+                isParametrized: true
+            },
         ]
     ],
 
@@ -60,8 +68,19 @@ export const SETTINGS = {
                 type:'range',
                 min:0,
                 max:1,
-                step:0.01
+                step:0.01,
+                defaultValue: 0.5
             },
+
+            {
+                id:2,
+                name:'filter-apply-number',
+                type:'range',
+                min:1,
+                max:10,
+                step:1,
+                defaultValue: 3
+            }
 
         ]
 };

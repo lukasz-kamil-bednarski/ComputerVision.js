@@ -8,7 +8,6 @@ class ContextOperationManager {
         const width = imageMatrix[0].length === imageMatrix[height - 1].length ? imageMatrix[0].length : null;
         let newImageMatrix = imageMatrix.slice(0);
         if (height > 0 && width > 0) {
-
             for (let row = 0; row < height - 1; row++) {
                 for (let column = 0; column < width - 1; column++) {
 
@@ -17,7 +16,7 @@ class ContextOperationManager {
                         continue;
                     }
 
-                    if (column === 0 || row === width - 1) {
+                    if (column === 0 || column === width - 1) {
                         newImageMatrix[row][column] = imageMatrix[row][column];
                         continue;
                     }
@@ -32,7 +31,7 @@ class ContextOperationManager {
                 }
             }
         }
-        const unzippedDataArray = new Uint8ClampedArray(LogicUtil.normalizeRGBArray(LogicUtil.unzipPixelMatrixIntoImageData(newImageMatrix)));
+        const unzippedDataArray = new Uint8ClampedArray(LogicUtil.unzipPixelMatrixIntoImageData(newImageMatrix));
         return new ImageData(unzippedDataArray, width, height);
     };
 
@@ -69,8 +68,6 @@ class ContextOperationManager {
             alphaChannel: noneOpacityValue
         }
     }
-
-
 }
 
 export default ContextOperationManager;

@@ -18,13 +18,28 @@ export class LogicUtil{
      * @returns {number}
      */
     static findArrayMax=(arr) =>{
-        let max = 0;
+        let max = arr[0];
         for(let num of arr){
             if(num > max){
                 max = num;
             }
         }
         return max;
+    };
+
+    /**
+     * Method finding a minimal element in an array
+     * @param arr
+     * @returns {number}
+     */
+    static findArrayMin=(arr) =>{
+        let min = arr[0];
+        for(let num of arr){
+            if(num < min){
+                min = num;
+            }
+        }
+        return min;
     };
 
 
@@ -35,12 +50,14 @@ export class LogicUtil{
      */
     static normalizeRGBArray = (arr) =>{
         const max = LogicUtil.findArrayMax(arr);
+        const min = LogicUtil.findArrayMin(arr);
         const length = arr.length;
 
         for(let i=0; i < length; i++){
-            arr[i] = (arr[i]/max) * 255;
+            arr[i] = ((arr[i]-min)/(max-min)) * 255;
         }
 
+        console.log(arr);
         return arr;
     };
 

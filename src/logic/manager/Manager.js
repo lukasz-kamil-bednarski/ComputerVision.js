@@ -12,15 +12,18 @@ class ActionManager{
         const imageData = ctx.getImageData(0,0, ctx.canvas.width, ctx.canvas.height);
         const operationManager = new BasicOperationManager();
         let modifiedImageData;
+        let matrix;
 
         const parameters = store.getState().parameters;
+        const gaussianKernel = [[1,1,1],[1,1,1],[1,1,1]];
+        const laplacianKernel = [[-1,-1,-1],[-1,8,-1],[-1,-1,-1]];
 
         try {
             switch (actionID) {
 
                 case '1':
                     modifiedImageData = operationManager.executeImageNegative(imageData);
-                    return;
+                    break;
 
                 case '2':
                     modifiedImageData = operationManager.executeImageAddition(imageData, additionalImageData);
@@ -34,21 +37,22 @@ class ActionManager{
                     modifiedImageData = operationManager.executeImageLinearCombination(imageData, additionalImageData, linearCombinationParameter);
                     break;
                 case '5':
-                    let matrix =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
-                    const kernel = [[-1,-1,-1], [-1,9,-1], [-1,-1,-1]];
-                    modifiedImageData = ContextOperationManager.executeImageConvolution(matrix, kernel);
-                    return;
+                    matrix =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
+                    modifiedImageData = ContextOperationManager.executeImageConvolution(matrix, gaussianKernel);
+                    break;
+
+                case '6':
+                    matrix =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
+                    modifiedImageData = ContextOperationManager.executeImageConvolution(matrix, laplacianKernel);
+                    break;
                 default:
                     console.log("INTERNAL ERROR");
                     return;
             }
+            ctx.putImageData(modifiedImageData, 0,0);
         }catch (e) {
             alert(e);
-        }finally {
-            ctx.putImageData(modifiedImageData, 0,0);
         }
-
     }
 }
-
 export default ActionManager;

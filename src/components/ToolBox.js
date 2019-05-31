@@ -5,7 +5,8 @@ import {addNewImage} from "../actions/imageGalleryActions";
 import {setAction} from "../actions/toolboxActions";
 import {connect} from 'react-redux';
 import {SETTINGS} from "../settings/Settings";
-import dropLogo from "../assets/png/dropzone.png"
+import dropLogo from "../assets/svg/dnd.svg"
+import draggableLogo from '../assets/png/draggable.png';
 import {findActionNameById} from "../settings/Settings";
 
 class ToolBox extends React.Component {
@@ -77,7 +78,6 @@ class ToolBox extends React.Component {
     render() {
 
         const algorithms = SETTINGS.algorithms;
-
         return (
             <div className="toolbox-container non-active">
                 <div className="toolbox-content">
@@ -85,6 +85,7 @@ class ToolBox extends React.Component {
                         <label htmlFor="file-picker">Choose a file</label>
                         <input onChange={this.handleFileInput} id="file-picker" style={{display:'none'}} type="file"/>
                     </div>
+                    <label className="drop-zone-label">Drag and drop images here</label>
                     <div className="drop-zone-container">
                         <Dropzone onDrop={acceptedFiles => this.drawDroppedImage(acceptedFiles)}>
                             {({getRootProps, getInputProps}) => (
@@ -106,11 +107,15 @@ class ToolBox extends React.Component {
                                     <div id={concreteAlgorithm.id}
                                          key={concreteAlgorithm.id}
                                          title={concreteAlgorithm.name}
-                                         className="single-algorithm-container"
+                                         className={"single-algorithm-container" + (concreteAlgorithm.argumentNumber === 1 ? ' draggable' : '')}
                                          draggable={concreteAlgorithm.argumentNumber === 1}
                                          onClick = {this.onSetAction}
                                          onDragStart={this.dragAction}>
                                         {concreteAlgorithm.name.toUpperCase()}
+                                        {concreteAlgorithm.argumentNumber === 1 ?
+                                            <div className="draggable-logo-container">
+                                                <img src={draggableLogo} />
+                                            </div> : <div className="empty"> </div>}
                                     </div>
                                 )
                             }))

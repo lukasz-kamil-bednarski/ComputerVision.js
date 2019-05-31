@@ -91,7 +91,7 @@
     width: 100%;
     background-color: $dark-color-theme;
     box-sizing: border-box;
-    @include flex-box(row, center, flex-start, true);
+    @include flex-box(column, flex-start, center, true);
     opacity: 0.8;
 
     .single-parameter-container{

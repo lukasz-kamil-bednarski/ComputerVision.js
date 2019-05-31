@@ -22,26 +22,31 @@ class ParametersBox extends React.Component {
     };
 
 
-    onSetParameters = (event) => {
-        let val = event.target.value;
+    onSetParameters = () => {
+        let linCombVal = document.getElementById("linear-combination-parameter").value;
+        let filterApplyNumber = document.getElementById("filter-apply-number").value;
+
         this.props.setParameters(
             {
-                linearCombinationParameter: val
+                linearCombinationParameter: linCombVal,
+                filterApplyNumber: filterApplyNumber
             }
         );
     };
 
 
     renderParameters = (parameter) => {
-        switch (parameter.name) {
-            case 'linear-combination-parameter':
+        switch (parameter.type) {
+            case 'range':
                 return (
                     <div key={parameter.name} className="single-parameter-container">
-                        <span>{this.props.parameters.linearCombinationParameter}</span>
+                        <span>{parameter.name === 'linear-combination-parameter' ? this.props.parameters.linearCombinationParameter : this.props.parameters.filterApplyNumber }</span>
                         <input min={parameter.min}
                                max={parameter.max}
                                step={parameter.step}
                                onChange={this.onSetParameters}
+                               id = {parameter.name}
+                               defaultValue={parameter.defaultValue}
                                type={parameter.type}/>
                         <span>{parameter.name}</span>
                     </div>
