@@ -2,11 +2,12 @@ import {LogicUtil} from "../../utils/LogicUtil";
 
 class ContextOperationManager {
 
-    static executeImageConvolution = (imageMatrix, kernel) => {
+    static executeImageConvolution = (imageMatrix, kernel, divide) => {
 
         const height = imageMatrix.length;
         const width = imageMatrix[0].length === imageMatrix[height - 1].length ? imageMatrix[0].length : null;
-        let newImageMatrix = imageMatrix.slice(0);
+        let newImageMatrix = ContextOperationManager.deepCopy(imageMatrix);
+
         if (height > 0 && width > 0) {
             for (let row = 0; row < height - 1; row++) {
                 for (let column = 0; column < width - 1; column++) {
@@ -27,7 +28,7 @@ class ContextOperationManager {
                             [imageMatrix[row][column - 1], imageMatrix[row][column], imageMatrix[row][column + 1]],
                             [imageMatrix[row + 1][column - 1], imageMatrix[row + 1][column], imageMatrix[row + 1][column + 1]],
                         ];
-                    newImageMatrix[row][column] = this.convolve(context, kernel);
+                    newImageMatrix[row][column] = this.convolve(context, kernel, divide);
                 }
             }
         }
@@ -36,17 +37,15 @@ class ContextOperationManager {
     };
 
 
-    static convolve(context, kernel) {
+    static convolve(context, kernel, isDivision) {
         let redAccumulator = 0;
         let greenAccumulator = 0;
         let blueAccumulator = 0;
         const kernelDimension = 3;
-        const kernelDimensionSurface = Math.pow(kernelDimension, 2);
         const noneOpacityValue = 255;
+        for (let i = 0; i < kernelDimension; i++) {
 
-        for (let i = 0; i < context.length; i++) {
-
-            for (let j = 0; j < context[i].length; j++) {
+            for (let j = 0; j < kernelDimension; j++) {
                 const pixel = {
                     redChannel: context[i][j].redChannel,
                     greenChannel: context[i][j].greenChannel,
@@ -57,9 +56,12 @@ class ContextOperationManager {
                 blueAccumulator += pixel.blueChannel * kernel[i][j];
             }
         }
-        redAccumulator /= kernelDimensionSurface;
-        greenAccumulator /= kernelDimensionSurface;
-        blueAccumulator /= kernelDimensionSurface;
+
+        if(isDivision){
+            redAccumulator /= kernelDimension*kernelDimension;
+            greenAccumulator /= kernelDimension*kernelDimension;
+            blueAccumulator /= kernelDimension*kernelDimension;
+        }
 
         return {
             redChannel: redAccumulator,
@@ -67,6 +69,14 @@ class ContextOperationManager {
             blueChannel: blueAccumulator,
             alphaChannel: noneOpacityValue
         }
+    }
+
+    static deepCopy = (matrix) =>{
+        let newMatrix = [];
+        for(let array of matrix){
+            newMatrix.push([...array]);
+        }
+        return newMatrix;
     }
 }
 

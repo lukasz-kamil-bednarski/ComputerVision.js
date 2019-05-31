@@ -44,20 +44,19 @@ export class LogicUtil{
 
 
     /**
-     * Normalizing an array into [0-255] range
+     * Normalizing an array into [0-255]
      * @param arr
      * @returns {*}
      */
     static normalizeRGBArray = (arr) =>{
         const max = LogicUtil.findArrayMax(arr);
-        const min = LogicUtil.findArrayMin(arr);
+        //const min = LogicUtil.findArrayMin(arr);
         const length = arr.length;
 
         for(let i=0; i < length; i++){
-            arr[i] = ((arr[i]-min)/(max-min)) * 255;
+            arr[i] = ((arr[i]/max) * 255);
         }
 
-        console.log(arr);
         return arr;
     };
 
