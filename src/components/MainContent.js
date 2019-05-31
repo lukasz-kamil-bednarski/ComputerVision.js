@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import DrawUtil from '../utils/DrawUtil';
 import downloadIcon from '../assets/png/download.png';
 import rightArrowIcon from '../assets/png/right-arrow.png';
+import {addNewImage} from "../actions/imageGalleryActions";
 
 class MainContent extends React.Component {
 
@@ -24,6 +25,29 @@ class MainContent extends React.Component {
         event.dataTransfer.clearData();
     };
 
+    /**
+     * Method allowing to download a current image from the canvas to the disc
+     */
+    downloadImage = () => {
+        let download = document.createElement("a");
+        let image = document.getElementById("fun-canvas").toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
+        download.setAttribute("href", image);
+        download.setAttribute("download", "image.png");
+        download.click();
+    };
+
+    /**
+     * Method moving(adding) a current image on the fun-canvas to image-gallery
+     */
+    moveToGallery = () => {
+        let dataUrl = this.canvas.toDataURL();
+        let image = document.createElement('img');
+        image.src = dataUrl;
+        this.props.addNewImage(image);
+
+    };
+
     render() {
         return (
             <div className="main-content-container">
@@ -33,13 +57,15 @@ class MainContent extends React.Component {
                         <div className="single-action-box">
                             <img alt="download-icon"
                                  src={downloadIcon}
-                                 title = "download icon"/>
+                                 onClick={this.downloadImage}
+                                 title="download icon"/>
                         </div>
 
                         <div className="single-action-box">
                             <img alt="download-icon"
+                                 onClick={this.moveToGallery}
                                  src={rightArrowIcon}
-                                title="move to gallery"/>
+                                 title="move to gallery"/>
                         </div>
 
                     </div>
@@ -68,4 +94,9 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps)(MainContent);
+const mapActionsToProps = {
+
+    addNewImage: addNewImage
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(MainContent);
