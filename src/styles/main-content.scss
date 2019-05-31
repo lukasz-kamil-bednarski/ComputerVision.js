@@ -7,7 +7,53 @@
   @include flex-box(row, center, center, true);
   background: $main-content-bg-color;
 
-  .fun-canvas{
-    background: $light-color-theme;
+
+  .fun-canvas-container{
+    position: absolute;
+
+    &:hover{
+      .main-canvas-action-box {
+        visibility: visible;
+      }
+    }
+    .main-canvas-action-box{
+      visibility: hidden;
+      max-width: 100%;
+      height: 10%;
+      position: absolute;
+      right: 0;
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      @include flex-box(row, flex-end,center,true);
+
+      .single-action-box{
+        width:10%;
+        height: 100%;
+        right: 0;
+        padding: 3px;
+        box-sizing: border-box;
+        cursor: pointer;
+        margin-left: 5px;
+        margin-right: 5px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+
+        &:hover{
+          background: $silver-color-theme;
+        }
+        img{
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          overflow: hidden;
+        }
+      }
+    }
+
+    .fun-canvas{
+      background: white;
+    }
   }
+
 }
