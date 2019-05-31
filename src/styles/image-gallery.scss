@@ -32,6 +32,35 @@
     width: $image-gallery-container-width;
     height: calc(100vh - #{$header-container-height});
 
+    .empty-info-container{
+      width: 100%;
+      color: $fresh-color;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      .empty-info{
+        text-align: center;
+        opacity: 0.7;
+
+        span{
+          font-size: 32pt;
+          font-weight: 800;
+          margin-bottom: 20px;
+        }
+        img{
+          display: block;
+          max-width: 100%;
+          object-fit: contain;
+          box-sizing: border-box;
+          padding:20px;
+          transition: 0.7s ease;
+
+          &:hover{
+            @include zoom-in(1.1);
+          }
+        }
+
+      }
+    }
     .image-gallery-list{
       box-sizing: border-box;
       overflow:auto;

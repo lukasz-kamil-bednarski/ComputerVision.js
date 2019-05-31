@@ -45,7 +45,7 @@ code {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 9px;
 }
 
 /* Track */
@@ -56,14 +56,15 @@ code {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: $fresh-color;
-  border-radius: 10px;
+  background: $silver-color-theme;
+  //border-radius: 10px;
   transition: 0.7s ease;
+  opacity: 0.8;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: darken($fresh-color, 15%);
+  background: darken($silver-color-theme, 15%);
 }
 
 ::selection{

@@ -5,12 +5,13 @@ import 'bootstrap/scss/bootstrap.scss';
 import {setMainImage} from "../actions/imageGalleryActions";
 import {deleteImage} from "../actions/imageGalleryActions";
 import DrawUtil from "../utils/DrawUtil";
+import {EmptyGallery} from "./EmptyGallery";
 
 class ImageGallery extends React.Component {
 
     renderImageGallery = (image, index) => {
         let className = "";
-        if(index === this.props.mainImageIndex){
+        if (index === this.props.mainImageIndex) {
             className += "active"
         }
         return (
@@ -18,12 +19,12 @@ class ImageGallery extends React.Component {
                  className="single-image-container"
                  onClick={() => this.setFunCanvasImage(index)}>
                 {/*<div className="delete-image-container" onClick={(e)=>this.deleteImage(e, index)}>*/}
-                    {/*<img width={40} height={40} src={trash}/>*/}
+                {/*<img width={40} height={40} src={trash}/>*/}
                 {/*</div>*/}
                 <img alt={'input'} className={className}
                      draggable={true}
                      onDragStart={this.onDragImage}
-                     data-index = {index}
+                     data-index={index}
                      src={image.src}/>
             </div>
         )
@@ -39,12 +40,12 @@ class ImageGallery extends React.Component {
 
     };
 
-    deleteImage = (e, delIndex)=>{
+    deleteImage = (e, delIndex) => {
         e.stopPropagation();
-        const newImages = this.props.images.filter((value, index)=>{
-           return delIndex!==index
+        const newImages = this.props.images.filter((value, index) => {
+            return delIndex !== index
         });
-         this.props.deleteImage(newImages);
+        this.props.deleteImage(newImages);
     };
 
     /**
@@ -57,10 +58,10 @@ class ImageGallery extends React.Component {
         DrawUtil.drawScaledImageOntoCanvas(img, canvas);
     };
 
-    onDragImage = (event) =>{
+    onDragImage = (event) => {
         event.persist();
         const transferData = {
-          imgIndex: event.target.dataset.index
+            imgIndex: event.target.dataset.index
         };
         event.dataTransfer.setData("text/plain", JSON.stringify(transferData));
 
@@ -74,8 +75,12 @@ class ImageGallery extends React.Component {
                 </div>
 
                 <div className="image-gallery-content">
+
                     <div className="image-gallery-list">
-                        {this.props.images.map(this.renderImageGallery).reverse()}
+                        {this.props.images.length > 0 ?
+                            this.props.images.map(this.renderImageGallery).reverse() :
+                            <EmptyGallery info ="Gallery is empty"/>
+                        }
                     </div>
 
                 </div>
