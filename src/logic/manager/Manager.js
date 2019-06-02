@@ -42,13 +42,13 @@ class ActionManager{
 
                 case '6':
                     matrix =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
-                    modifiedImageData = ContextOperationManager.executeImageConvolution(matrix, laplacianKernel, true);
+                    modifiedImageData = ContextOperationManager.executeImageConvolution(matrix, laplacianKernel, false);
                     break;
 
                 case '7':
                     const ownKernel = store.getState().parameters.kernel;
-                    console.log(ownKernel);
                     matrix =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
+                    console.log(LogicUtil.decideNormalization(ownKernel));
                     modifiedImageData = ContextOperationManager.executeImageConvolution(matrix, ownKernel, false);
                     break;
                 default:

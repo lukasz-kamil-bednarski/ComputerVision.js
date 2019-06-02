@@ -60,6 +60,11 @@ export class LogicUtil{
         return arr;
     };
 
+    /**
+     * Converting image data sequence into matrix of pixels
+     * @param imageData
+     * @returns {Array}
+     */
    static convertImageDataIntoPixelMatrix(imageData) {
 
         const size = {
@@ -123,6 +128,11 @@ export class LogicUtil{
         return outputImageData;
     };
 
+    /**
+     * Unzipping pixel matrix into image data sequence
+     * @param pixelMatrix
+     * @returns {Array}
+     */
     static unzipPixelMatrixIntoImageData = (pixelMatrix) =>{
         const height = pixelMatrix.length;
         const width = pixelMatrix[0].length === pixelMatrix[height - 1].length ? pixelMatrix[0].length : null;
@@ -139,5 +149,116 @@ export class LogicUtil{
             }
         }
         return imageDataArray;
+    };
+
+    /**
+     * Taking a decision if normalization should be executed
+     * @param kernel
+     * @returns {boolean}
+     */
+    static decideNormalization = (kernel)=>{
+        const rowNumber = kernel.length;
+        let accumulator=0;
+        for(let i=0; i<rowNumber;i++){
+            for(let j=0; j<kernel[i].length; j++){
+                accumulator+=kernel[i][j];
+            }
+        }
+        return accumulator>0;
+    };
+
+
+    /**
+     * Finding max red,green,blue values
+     * @param rgbMatrix
+     * @returns {{rMax: number, gMax: number, bMax: number}}
+     */
+    static findRGBMatrixMax = (rgbMatrix) =>{
+        const height = rgbMatrix.length;
+        let redMax = 0;
+        let greenMax = 0;
+        let blueMax = 0;
+        for(let row = 0; row<height; row++){
+            for(let col = 0; col<rgbMatrix[row].length; col++){
+                let pixel = {
+                    red: rgbMatrix[row][col].redChannel,
+                    green: rgbMatrix[row][col].greenChannel,
+                    blue: rgbMatrix[row][col].blueChannel
+                };
+                if(pixel.red > redMax){
+                    redMax = pixel.red
+                }
+                if(pixel.green > greenMax){
+                    greenMax = pixel.green
+                }
+                if(pixel.blue > blueMax){
+                    blueMax = pixel.blue
+                }
+            }
+        }
+        return {
+            rMax: redMax,
+            gMax: greenMax,
+            bMax: blueMax
+        }
+    };
+
+    /**
+     * Finding max red,green,blue values
+     * @param rgbMatrix
+     * @returns {{rMax: number, gMax: number, bMax: number}}
+     */
+    static findRGBMatrixMin = (rgbMatrix) =>{
+        const height = rgbMatrix.length;
+        let redMin = 0;
+        let greenMin = 0;
+        let blueMin= 0;
+        for(let row = 0; row<height; row++){
+            for(let col = 0; col<rgbMatrix[row].length; col++){
+                let pixel = {
+                    red: rgbMatrix[row][col].redChannel,
+                    green: rgbMatrix[row][col].greenChannel,
+                    blue: rgbMatrix[row][col].blueChannel
+                };
+                if(pixel.red < redMin){
+                    redMin = pixel.red
+                }
+                if(pixel.green < greenMin){
+                    greenMin= pixel.green
+                }
+                if(pixel.blue < blueMin){
+                    blueMin = pixel.blue
+                }
+            }
+        }
+        return {
+            rMin: redMin,
+            gMin: greenMin,
+            bMin: blueMin
+        }
+    };
+
+    /**
+     * Normalizing rgb matrix
+     * @param rgbMatrix
+     * @param maximals
+     * @param minimals
+     * @returns {*}
+     */
+    static normalizeRGBMatrix = (rgbMatrix,maximals, minimals) =>{
+        const height = rgbMatrix.length;
+        for(let row = 0; row<height;row++){
+            for(let col =0; col<rgbMatrix[row].length; col++){
+                const pixel = {
+                    redChannel: rgbMatrix[row][col].redChannel,
+                    greenChannel: rgbMatrix[row][col].greenChannel,
+                    blueChannel: rgbMatrix[row][col].blueChannel
+                };
+                rgbMatrix[row][col].redChannel = ((pixel.redChannel - minimals.rMin)/(maximals.rMax - minimals.rMin))*255;
+                rgbMatrix[row][col].greenChannel = ((pixel.greenChannel- minimals.gMin)/(maximals.gMax - minimals.gMin)) *255;
+                rgbMatrix[row][col].blueChannel = ((pixel.blueChannel - minimals.bMin)/(maximals.bMax - minimals.bMin))*255;
+            }
+        }
+        return rgbMatrix;
     }
 }

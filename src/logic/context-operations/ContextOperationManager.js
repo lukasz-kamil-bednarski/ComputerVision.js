@@ -32,6 +32,10 @@ class ContextOperationManager {
                 }
             }
         }
+
+        const maximals = LogicUtil.findRGBMatrixMax(newImageMatrix);
+        const minimals = LogicUtil.findRGBMatrixMin(newImageMatrix);
+        newImageMatrix = LogicUtil.normalizeRGBMatrix(newImageMatrix, maximals, minimals);
         const unzippedDataArray = new Uint8ClampedArray(LogicUtil.unzipPixelMatrixIntoImageData(newImageMatrix));
         return new ImageData(unzippedDataArray, width, height);
     };
@@ -57,11 +61,11 @@ class ContextOperationManager {
             }
         }
 
-        if(isDivision){
-            redAccumulator /= kernelDimension*kernelDimension;
-            greenAccumulator /= kernelDimension*kernelDimension;
-            blueAccumulator /= kernelDimension*kernelDimension;
-        }
+        // if(isDivision){
+        //     redAccumulator /= kernelDimension*kernelDimension;
+        //     greenAccumulator /= kernelDimension*kernelDimension;
+        //     blueAccumulator /= kernelDimension*kernelDimension;
+        // }
 
         return {
             redChannel: redAccumulator,
