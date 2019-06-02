@@ -18,10 +18,11 @@
     overflow-y:auto;
 
     .input-file-container{
-      background: $fresh-color;
+      background: transparent;
       font-weight: 500;
       border-radius: 20px;
       margin-bottom: 20px;
+      transition: 0.7S ease;
       label{
         display: block;
         color:$dark-color-theme;
@@ -35,8 +36,9 @@
       }
 
       &:hover{
+        background-color: $fresh-color;
         label{
-          color:$light-color-theme;
+          //color:$light-color-theme;
         }
       }
     }
@@ -114,9 +116,7 @@
 
         &.draggable{
           cursor:grab;
-          &:active{
-            cursor:grabbing;
-          }
+
         }
         &:hover {
           background-color: lighten($fresh-color, 10);
@@ -126,6 +126,7 @@
         &:active {
           background-color: darken($fresh-color, 10);
           color: lighten(white, 10);
+          cursor: grabbing;
         }
 
         .draggable-logo-container{

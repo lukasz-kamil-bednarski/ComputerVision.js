@@ -1,8 +1,9 @@
 import React from "react";
 import {SETTINGS} from '../settings/Settings';
-import {deleteImage, setMainImage} from "../actions/imageGalleryActions";
+//import {deleteImage, setMainImage} from "../actions/imageGalleryActions";
 import {connect} from 'react-redux';
 import {setParameters} from "../actions/parametersAction";
+import KernelMatrix from "./KernelMatrix";
 
 class ParametersBox extends React.Component {
 
@@ -49,10 +50,18 @@ class ParametersBox extends React.Component {
                                defaultValue={parameter.defaultValue}
                                type={parameter.type}/>
                         <span>{parameter.name}</span>
-                    </div>
+                    </div>);
+
+            case 'matrix':
+                return(
+                    <KernelMatrix min={parameter.min}
+                                  max={parameter.max}
+                                  name = {parameter.name}
+                                  type={parameter.type}/>
                 );
+
             default:
-                return null;
+                return;
         }
     };
 

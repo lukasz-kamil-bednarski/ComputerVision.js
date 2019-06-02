@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from 'react-redux';
-import 'bootstrap/scss/bootstrap.scss';
 // import trash from '../assets/png/trash-circle.png';
 import {setMainImage} from "../actions/imageGalleryActions";
 import {deleteImage} from "../actions/imageGalleryActions";

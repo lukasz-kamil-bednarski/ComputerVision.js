@@ -36,6 +36,7 @@
         cursor: pointer;
         @include flex-box(column, center,center, true);
         background: $silver-color-theme;
+        z-index: 250;
 
         &:hover{
           background: lighten($silver-color-theme, 5%);
@@ -46,6 +47,10 @@
           object-fit: contain;
           overflow: hidden;
           display: block;
+          //transition: background 0.7s;
+          &:hover{
+            @include zoom-in(1.1);
+          }
         }
       }
     }

@@ -85,6 +85,12 @@ class MainContent extends React.Component {
         );
     }
 
+    componentDidMount(){
+        this.canvas.addEventListener("resize", function(){
+            console.log("XD")
+        }, false)
+    }
+
 }
 
 const mapStateToProps = (state) => {

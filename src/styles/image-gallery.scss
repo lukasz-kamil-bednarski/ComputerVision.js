@@ -17,7 +17,6 @@
     border-bottom-left-radius: 20px;
     cursor: pointer;
 
-
     span{
       color: $dark-color-theme;
       font-weight: 800;
@@ -37,6 +36,7 @@
       color: $fresh-color;
       overflow-x: hidden;
       overflow-y: hidden;
+
       .empty-info{
         text-align: center;
         opacity: 0.7;
@@ -55,7 +55,8 @@
           transition: 0.7s ease;
 
           &:hover{
-            @include zoom-in(1.1);
+            transform: rotate3d(0,0,20, 20deg) scale(1,1);
+
           }
         }
 

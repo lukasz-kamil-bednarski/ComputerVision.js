@@ -13,12 +13,9 @@ class ActionManager{
         const operationManager = new BasicOperationManager();
         let modifiedImageData;
         let matrix;
-
         const parameters = store.getState().parameters;
         const gaussianKernel = [[1,1,1],[1,1,1],[1,1,1]];
         const laplacianKernel = [[-1,-1,-1],[-1,8,-1],[-1,-1,-1]];
-
-        const ownFilter = [[0,0,0],[0,1,0],[0,0,0]];
 
         try {
             switch (actionID) {
@@ -49,8 +46,10 @@ class ActionManager{
                     break;
 
                 case '7':
+                    const ownKernel = store.getState().parameters.kernel;
+                    console.log(ownKernel);
                     matrix =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
-                    modifiedImageData = ContextOperationManager.executeImageConvolution(matrix, ownFilter, false);
+                    modifiedImageData = ContextOperationManager.executeImageConvolution(matrix, ownKernel, false);
                     break;
                 default:
                     console.log("INTERNAL ERROR");
