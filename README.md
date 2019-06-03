@@ -1,8 +1,5 @@
-<header>ComputerVision.js</header>
+<header><h1>ComputerVision.js</h1></header>
 
-<main>
-
-<section>
     <p>The project has been created using a common JavaScript framework - ReactJS</p>
     <p>The purpose of the project is to implement some of the CV(computer vision) algorithms</p>
     <p>Currently there are implemented following algorithms:</p>
@@ -16,8 +13,6 @@
         <li>Gaussian filtering</li>
         <li>Laplacian filtering</li>
     </ol>
-</section>
-
     <p>Below we can see a mock algorithm(image addition)</p>
     <p align = "center">
         <img src = "./src/assets/video/first.gif"/>
@@ -27,5 +22,3 @@
     <p align = "center">
         <img src = "./src/assets/video/params.gif"/>
     </p>
-
-</main>
