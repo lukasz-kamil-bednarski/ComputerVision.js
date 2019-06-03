@@ -16,7 +16,13 @@ class KernelMatrix extends React.Component {
         const rowIndex = parseInt(event.target.dataset.rowIndex);
         const colIndex = parseInt(event.target.dataset.colIndex);
         prevKernel[rowIndex][colIndex] = parseInt(event.target.value);
-        this.props.setParameters({kernel: prevKernel});
+        let lcp = document.getElementById("linear-combination-parameter").value;
+        let fan = document.getElementById("filter-apply-number").value;
+        this.props.setParameters({
+            linearCombinationParameter: lcp,
+            filterApplyNumber: fan,
+            kernel: prevKernel
+        });
     };
 
     render() {

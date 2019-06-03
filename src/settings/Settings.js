@@ -64,7 +64,7 @@ export const SETTINGS = {
         [
             {
                 id:1,
-                name:'linear combination parameter',
+                name:'linear-combination-parameter',
                 type:'range',
                 min:0,
                 max:1,
@@ -74,7 +74,7 @@ export const SETTINGS = {
 
             {
                 id:2,
-                name:'filter apply number',
+                name:'filter-apply-number',
                 type:'range',
                 min:1,
                 max:10,
