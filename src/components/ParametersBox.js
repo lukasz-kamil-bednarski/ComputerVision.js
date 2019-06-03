@@ -4,6 +4,7 @@ import {SETTINGS} from '../settings/Settings';
 import {connect} from 'react-redux';
 import {setParameters} from "../actions/parametersAction";
 import KernelMatrix from "./KernelMatrix";
+import {store} from '../index';
 
 class ParametersBox extends React.Component {
 
@@ -27,10 +28,12 @@ class ParametersBox extends React.Component {
         let linCombVal = document.getElementById("linear-combination-parameter").value;
         let filterApplyNumber = document.getElementById("filter-apply-number").value;
 
+        const kernel = store.getState().parameters.kernel;
         this.props.setParameters(
             {
                 linearCombinationParameter: linCombVal,
-                filterApplyNumber: filterApplyNumber
+                filterApplyNumber: filterApplyNumber,
+                kernel: kernel
             }
         );
     };
