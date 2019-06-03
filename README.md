@@ -2,7 +2,7 @@
 <p>The project has been created using a common JavaScript framework - ReactJS</p>
 <p>The purpose of the project is to implement some of the CV(computer vision) algorithms</p>
 <p>Currently there are implemented following algorithms:</p>
-<ol>
+<ul>
         <li>negative</li>
         <li>addition</li>
         <li>subtraction</li>
@@ -10,7 +10,7 @@
         <li>Convolution</li>
         <li>Gaussian filtering</li>
         <li>Laplacian filtering</li>
-</ol>
+</ul>
 <p>Below we can see a mock algorithm(image addition)</p>
 <p align = "center">
         <img src = "./src/assets/video/first.gif"/>
