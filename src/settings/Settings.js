@@ -4,6 +4,11 @@ export const SETTINGS = {
         height: 800
     },
 
+    funCanvasSmallDesktopSize: {
+        width: 900,
+        height: 600
+    },
+
     algorithms: [
         [
             {
@@ -79,7 +84,7 @@ export const SETTINGS = {
                 min:1,
                 max:10,
                 step:1,
-                defaultValue: 3
+                defaultValue: 1
             },
             {
                 id:3,

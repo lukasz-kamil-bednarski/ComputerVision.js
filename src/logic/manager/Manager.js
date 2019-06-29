@@ -11,11 +11,13 @@ class ActionManager{
         let ctx = canvas.getContext("2d");
         const imageData = ctx.getImageData(0,0, ctx.canvas.width, ctx.canvas.height);
         const operationManager = new BasicOperationManager();
+        let modifiedMatrix;
         let modifiedImageData;
         let matrix;
         const parameters = store.getState().parameters;
         const gaussianKernel = [[1,1,1],[1,1,1],[1,1,1]];
         const laplacianKernel = [[-1,-1,-1],[-1,8,-1],[-1,-1,-1]];
+        const filterApplyNumber = store.getState().parameters.filterApplyNumber;
 
         try {
             switch (actionID) {
@@ -37,19 +39,36 @@ class ActionManager{
                     break;
                 case '5':
                     matrix =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
-                    modifiedImageData = ContextOperationManager.executeImageConvolution(matrix, gaussianKernel, true);
+                    if(filterApplyNumber > 1){
+                        matrix = this.loopConvolution(ContextOperationManager.executeImageConvolution, matrix,gaussianKernel,filterApplyNumber, true);
+                        modifiedImageData= ContextOperationManager.convertPixelMatrixIntoImageData(matrix, imageData.width, imageData.height);
+                    }else{
+                        modifiedMatrix = ContextOperationManager.executeImageConvolution(matrix, gaussianKernel, true);
+                        modifiedImageData= ContextOperationManager.convertPixelMatrixIntoImageData(modifiedMatrix, imageData.width, imageData.height);
+                    }
                     break;
 
                 case '6':
                     matrix =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
-                    modifiedImageData = ContextOperationManager.executeImageConvolution(matrix, laplacianKernel, false);
+                    if(filterApplyNumber > 1){
+                        matrix = this.loopConvolution(ContextOperationManager.executeImageConvolution, matrix, laplacianKernel,filterApplyNumber, true);
+                        modifiedImageData= ContextOperationManager.convertPixelMatrixIntoImageData(matrix, imageData.width, imageData.height);
+                    }else{
+                        modifiedMatrix = ContextOperationManager.executeImageConvolution(matrix, laplacianKernel, true);
+                        modifiedImageData= ContextOperationManager.convertPixelMatrixIntoImageData(modifiedMatrix, imageData.width, imageData.height);
+                    }
                     break;
 
                 case '7':
                     const ownKernel = store.getState().parameters.kernel;
                     matrix =LogicUtil.convertImageDataIntoPixelMatrix(imageData);
-                    console.log(LogicUtil.decideNormalization(ownKernel));
-                    modifiedImageData = ContextOperationManager.executeImageConvolution(matrix, ownKernel, false);
+                    if(filterApplyNumber > 1){
+                        matrix = this.loopConvolution(ContextOperationManager.executeImageConvolution, matrix,ownKernel,filterApplyNumber, true);
+                        modifiedImageData= ContextOperationManager.convertPixelMatrixIntoImageData(matrix, imageData.width, imageData.height);
+                    }else{
+                        modifiedMatrix = ContextOperationManager.executeImageConvolution(matrix, ownKernel, true);
+                        modifiedImageData= ContextOperationManager.convertPixelMatrixIntoImageData(modifiedMatrix, imageData.width, imageData.height);
+                    }
                     break;
                 default:
                     console.log("INTERNAL ERROR");
@@ -59,6 +78,14 @@ class ActionManager{
         }catch (e) {
             alert(e);
         }
+    }
+
+    static loopConvolution(convolve,matrix, kernel, number, isNormalized){
+        let result = matrix;
+        for(let i=0;i< number; i++){
+            result = convolve(result, kernel, isNormalized);
+        }
+        return result;
     }
 }
 export default ActionManager;

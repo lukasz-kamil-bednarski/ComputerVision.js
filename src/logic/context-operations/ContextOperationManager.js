@@ -3,11 +3,9 @@ import {LogicUtil} from "../../utils/LogicUtil";
 class ContextOperationManager {
 
     static executeImageConvolution = (imageMatrix, kernel, divide) => {
-
         const height = imageMatrix.length;
         const width = imageMatrix[0].length === imageMatrix[height - 1].length ? imageMatrix[0].length : null;
         let newImageMatrix = ContextOperationManager.deepCopy(imageMatrix);
-
         if (height > 0 && width > 0) {
             for (let row = 0; row < height - 1; row++) {
                 for (let column = 0; column < width - 1; column++) {
@@ -36,8 +34,9 @@ class ContextOperationManager {
         const maximals = LogicUtil.findRGBMatrixMax(newImageMatrix);
         const minimals = LogicUtil.findRGBMatrixMin(newImageMatrix);
         newImageMatrix = LogicUtil.normalizeRGBMatrix(newImageMatrix, maximals, minimals);
-        const unzippedDataArray = new Uint8ClampedArray(LogicUtil.unzipPixelMatrixIntoImageData(newImageMatrix));
-        return new ImageData(unzippedDataArray, width, height);
+        // const unzippedDataArray = new Uint8ClampedArray(LogicUtil.unzipPixelMatrixIntoImageData(newImageMatrix));
+        // return new ImageData(unzippedDataArray, width, height);
+        return newImageMatrix;
     };
 
 
@@ -81,6 +80,12 @@ class ContextOperationManager {
             newMatrix.push([...array]);
         }
         return newMatrix;
+    };
+
+
+    static convertPixelMatrixIntoImageData(matrix, width, height){
+        const unzippedDataArray = new Uint8ClampedArray(LogicUtil.unzipPixelMatrixIntoImageData(matrix));
+        return new ImageData(unzippedDataArray, width, height);
     }
 }
 
