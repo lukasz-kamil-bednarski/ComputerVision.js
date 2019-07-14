@@ -13,11 +13,14 @@ export default class ColorSpaceConverter {
         const length = pixelArray.length;
         for(let i = 0; i < length; i++){
             let pixel = pixelArray[i];
-            pixel.redChannel = pixel.redChannel * this.luminosityWeights.red +  pixel.greenChannel * this.luminosityWeights.green + pixel.blueChannel * this.luminosityWeights.blue;
-            pixel.greenChannel = pixel.redChannel * this.luminosityWeights.red +  pixel.greenChannel * this.luminosityWeights.green + pixel.blueChannel * this.luminosityWeights.blue;
-            pixel.blueChannel = pixel.redChannel * this.luminosityWeights.red +  pixel.greenChannel * this.luminosityWeights.green + pixel.blueChannel * this.luminosityWeights.blue;
+            let modifiedPixel={};
+            let newValue = pixel.redChannel * this.luminosityWeights.red +  pixel.greenChannel * this.luminosityWeights.green + pixel.blueChannel * this.luminosityWeights.blue;
+            modifiedPixel.redChannel = newValue;
+            modifiedPixel.greenChannel = newValue;
+            modifiedPixel.blueChannel = newValue;
+            modifiedPixel.alphaChannel = pixel.alphaChannel;
+            pixelArray[i] = modifiedPixel;
         }
-        console.log(pixelArray);
         return LogicUtil.unzipPixelArrayIntoImageData(pixelArray, imageData.width, imageData.height);
     }
 
