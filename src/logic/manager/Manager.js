@@ -73,8 +73,8 @@ class ActionManager{
                     break;
 
                 case '8':
-                    new ColorSpaceConverter().switchToGrayScaleByLuminosity(imageData);
-                    return;
+                    const converter = new ColorSpaceConverter();
+                    modifiedImageData = converter.switchToGrayScaleByLuminosity(imageData);
                     break;
                 default:
                     console.log("INTERNAL ERROR");

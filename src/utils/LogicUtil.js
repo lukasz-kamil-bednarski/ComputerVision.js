@@ -164,7 +164,10 @@ export class LogicUtil{
         const length = pixelArray.length;
 
         for(let i =0; i<length; i++){
-            this.pushRGBObjectIntoArray(sequence, pixelArray[i]);
+            sequence.push(pixelArray[i].redChannel);
+            sequence.push(pixelArray[i].greenChannel);
+            sequence.push(pixelArray[i].blueChannel);
+            sequence.push(pixelArray[i].alphaChannel);
         }
         return new ImageData(new Uint8ClampedArray(sequence), width, height);
 };
