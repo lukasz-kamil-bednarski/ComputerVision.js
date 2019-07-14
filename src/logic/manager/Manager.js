@@ -3,6 +3,7 @@ import {store} from '../../index';
 import {LogicUtil} from "../../utils/LogicUtil";
 import ContextOperationManager from "../context-operations/ContextOperationManager";
 import ColorSpaceConverter from '../ColorSpaceConverter/ColorSpaceConverter';
+import SegmentationOperationManager from "../segmentation-operations/SegmentationOperationManager";
 
 class ActionManager{
 
@@ -19,6 +20,7 @@ class ActionManager{
         const gaussianKernel = [[1,1,1],[1,1,1],[1,1,1]];
         const laplacianKernel = [[-1,-1,-1],[-1,8,-1],[-1,-1,-1]];
         const filterApplyNumber = store.getState().parameters.filterApplyNumber;
+        const binarizationThreshold = store.getState().parameters.binarizationThreshold;
 
         try {
             switch (actionID) {
@@ -75,6 +77,10 @@ class ActionManager{
                 case '8':
                     const converter = new ColorSpaceConverter();
                     modifiedImageData = converter.switchToGrayScaleByLuminosity(imageData);
+                    break;
+
+                case '9':
+                    modifiedImageData = SegmentationOperationManager.binarise(imageData, binarizationThreshold);
                     break;
                 default:
                     console.log("INTERNAL ERROR");

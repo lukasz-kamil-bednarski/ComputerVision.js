@@ -27,13 +27,15 @@ class ParametersBox extends React.Component {
     onSetParameters = () => {
         let linCombVal = document.getElementById("linear-combination-parameter").value;
         let filterApplyNumber = document.getElementById("filter-apply-number").value;
+        let binarizationThreshold = document.getElementById("binarization-threshold").value;
 
         const kernel = store.getState().parameters.kernel;
         this.props.setParameters(
             {
                 linearCombinationParameter: linCombVal,
                 filterApplyNumber: filterApplyNumber,
-                kernel: kernel
+                kernel: kernel,
+                binarizationThreshold: binarizationThreshold
             }
         );
     };
@@ -44,7 +46,8 @@ class ParametersBox extends React.Component {
             case 'range':
                 return (
                     <div key={parameter.name} className="single-parameter-container">
-                        <span>{parameter.name === 'linear-combination-parameter' ? this.props.parameters.linearCombinationParameter : this.props.parameters.filterApplyNumber }</span>
+                        <span>{parameter.name === 'linear-combination-parameter' ? this.props.parameters.linearCombinationParameter :
+                             parameter.name === 'binarization-threshold' ? this.props.parameters.binarizationThreshold : this.props.parameters.filterApplyNumber }</span>
                         <input min={parameter.min}
                                max={parameter.max}
                                step={parameter.step}

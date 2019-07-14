@@ -69,6 +69,14 @@ export const SETTINGS = {
                 isParametrized: false,
 
             },
+            {
+                id: 9,
+                name: 'binarization',
+                type:'segmentation',
+                argumentNumber:1,
+                isParametrized: true
+
+            },
         ]
     ],
 
@@ -95,6 +103,16 @@ export const SETTINGS = {
             },
             {
                 id:3,
+                name:'binarization-threshold',
+                type:'range',
+                inputType: 'number',
+                min: 0,
+                max: 255,
+                step:1
+            },
+
+            {
+                id:4,
                 name:'kernel',
                 type:'matrix',
                 inputType: 'number',
