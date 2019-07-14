@@ -41,12 +41,11 @@ export const SETTINGS = {
             },
 
             {
-                id: 5,
-                name: 'gaussian filter',
-                type:'filter',
-                argumentNumber:1,
-                isParametrized: true,
-
+                id: 4,
+                name: 'linear-combination',
+                type: 'basic',
+                argumentNumber: 2,
+                isParametrized: true
             },
             {
                 id: 6,
@@ -60,7 +59,15 @@ export const SETTINGS = {
                 name: 'own filter',
                 type:'filter',
                 argumentNumber:1,
-                isParametrized: true
+                isParametrized: false
+            },
+            {
+                id: 8,
+                name: 'Gray-scale',
+                type:'converter',
+                argumentNumber:1,
+                isParametrized: false,
+
             },
         ]
     ],

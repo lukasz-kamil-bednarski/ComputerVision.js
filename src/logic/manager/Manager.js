@@ -2,6 +2,7 @@ import BasicOperationManager from '../basic-operations/BasicOperationManager';
 import {store} from '../../index';
 import {LogicUtil} from "../../utils/LogicUtil";
 import ContextOperationManager from "../context-operations/ContextOperationManager";
+import ColorSpaceConverter from '../ColorSpaceConverter/ColorSpaceConverter';
 
 class ActionManager{
 
@@ -69,6 +70,11 @@ class ActionManager{
                         modifiedMatrix = ContextOperationManager.executeImageConvolution(matrix, ownKernel, true);
                         modifiedImageData= ContextOperationManager.convertPixelMatrixIntoImageData(modifiedMatrix, imageData.width, imageData.height);
                     }
+                    break;
+
+                case '8':
+                    new ColorSpaceConverter().switchToGrayScaleByLuminosity(imageData);
+                    return;
                     break;
                 default:
                     console.log("INTERNAL ERROR");

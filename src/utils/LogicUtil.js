@@ -151,6 +151,25 @@ export class LogicUtil{
         return imageDataArray;
     };
 
+
+    /**
+     * Uzipping pixelArray into ImageData
+     * @param pixelArray
+     * @param width
+     * @param height
+     * @return {ImageData}
+     */
+    static unzipPixelArrayIntoImageData = (pixelArray, width, height) => {
+        let sequence = [];
+        const length = pixelArray.length;
+
+        for(let i =0; i<length; i++){
+            this.pushRGBObjectIntoArray(sequence, pixelArray[i]);
+        }
+        return new ImageData(new Uint8ClampedArray(sequence), width, height);
+};
+
+
     /**
      * Taking a decision if normalization should be executed
      * @param kernel

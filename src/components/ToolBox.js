@@ -114,7 +114,7 @@ class ToolBox extends React.Component {
                                         {concreteAlgorithm.name.toUpperCase()}
                                         {concreteAlgorithm.argumentNumber === 1 ?
                                             <div className="draggable-logo-container">
-                                                <img src={draggableLogo} />
+                                                <img src={draggableLogo} alt ="draggable"/>
                                             </div> : <div className="empty"> </div>}
                                     </div>
                                 )
