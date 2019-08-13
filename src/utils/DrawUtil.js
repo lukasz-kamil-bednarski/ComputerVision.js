@@ -37,13 +37,18 @@ export default class DrawUtil {
         if(ctx !== null) {
 
 
-            const width = SETTINGS.funCanvasDesktopSize.width;
-            const height = SETTINGS.funCanvasDesktopSize.height;
+            let width;
+            let height;
+            if(window.width >= 1200){
+                width = SETTINGS.funCanvasDesktopSize.width;
+                height = SETTINGS.funCanvasDesktopSize.height;
+            }else{
+                width = SETTINGS.funCanvasSmallDesktopSize.width;
+                height = SETTINGS.funCanvasSmallDesktopSize.height;
+            }
 
             ctx.canvas.width = width;
             ctx.canvas.height = height; //restoring default values
-
-
             ctx.clearRect(0, 0, width, height);
 
             if (imgWidth < width && imgHeight < height) {

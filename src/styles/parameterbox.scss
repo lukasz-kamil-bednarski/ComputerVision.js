@@ -98,14 +98,14 @@
       width: auto;
       background-color: transparent;
       color: $light-color-theme;
-      padding: 12px;
-      margin-top: 10px;
+      padding: 8px;
+      margin-top: 6px;
       opacity: 1;
       @include flex-box(column, center, center, true);
 
       span {
         margin: 15px;
-        font-size: 16pt;
+        font-size: 10pt;
         font-weight: 500;
 
       }
