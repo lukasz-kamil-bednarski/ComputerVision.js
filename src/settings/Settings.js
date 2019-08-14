@@ -41,7 +41,7 @@ export const SETTINGS = {
             },
 
             {
-                id: 4,
+                id: 5,
                 name: 'gaussian filter',
                 type: 'basic',
                 argumentNumber: 2,

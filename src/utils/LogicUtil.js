@@ -282,5 +282,20 @@ export class LogicUtil{
             }
         }
         return rgbMatrix;
-    }
+    };
+
+    /**
+     * Deep copy of matrix
+     * @param matrix
+     * @returns {Array}
+     */
+    static deepCopy = (matrix) =>{
+        let newMatrix = [];
+        for(let array of matrix){
+            newMatrix.push([...array]);
+        }
+        return newMatrix;
+    };
+
+
 }

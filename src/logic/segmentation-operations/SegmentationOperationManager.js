@@ -5,6 +5,9 @@ export default class SegmentationOperationManager {
 
     static binarise(imageData, threshold){
 
+        if(!threshold){
+            threshold = 127;
+        }
         let grayScaleImageData = new ColorSpaceConverter().switchToGrayScaleByLuminosity(imageData);
         let grayScalePixelArray = LogicUtil.zipImageDataIntoPixelArray(grayScaleImageData.data);
         const length = grayScalePixelArray.length;

@@ -4,6 +4,7 @@ import {LogicUtil} from "../../utils/LogicUtil";
 import ContextOperationManager from "../context-operations/ContextOperationManager";
 import ColorSpaceConverter from '../ColorSpaceConverter/ColorSpaceConverter';
 import SegmentationOperationManager from "../segmentation-operations/SegmentationOperationManager";
+import MorphologicalOperationManager from '../morphological-operations/MorphologicalOperationManager';
 
 class ActionManager{
 
@@ -80,12 +81,16 @@ class ActionManager{
                     break;
 
                 case '9':
+                    modifiedImageData = MorphologicalOperationManager.executeMorphologicalOperation(imageData);
+                    break;
+                case '10':
                     modifiedImageData = SegmentationOperationManager.binarise(imageData, binarizationThreshold);
                     break;
                 default:
                     console.log("INTERNAL ERROR");
                     return;
             }
+            console.log("works");
             ctx.putImageData(modifiedImageData, 0,0);
         }catch (e) {
             alert(e);
