@@ -1,9 +1,10 @@
 import {LogicUtil} from "../../utils/LogicUtil";
 import SegmentationOperationManager from '../segmentation-operations/SegmentationOperationManager';
+import {SETTINGS} from '../../settings/Settings';
 
 export default class MorphologicalOperationManagerr {
 
-    static executeMorphologicalOperation(imageData) {
+    static executeMorphologicalOperation(imageData, type) {
         imageData = SegmentationOperationManager.binarise(imageData);
         let pixelMatrix = LogicUtil.convertImageDataIntoPixelMatrix(imageData);
         let outputMatrix = LogicUtil.deepCopy(pixelMatrix);
@@ -17,13 +18,27 @@ export default class MorphologicalOperationManagerr {
                 if (col === 0 || col === width - 1) {
                     continue;
                 }
-                const val = this.erode(this.getMooreNeighborhood(pixelMatrix, row, col));
+
+                let val;
+                switch (type){
+                    case SETTINGS.morphologyOperations.EROSION:
+                         val = this.erode(this.getMooreNeighborhood(pixelMatrix, row, col));
+                            break;
+
+                    case SETTINGS.morphologyOperations.DILATION:
+                        val = this.dilate(this.getMooreNeighborhood(pixelMatrix, row, col));
+                        break;
+                    default:
+                        throw new Error('Wrong morphology operation!');
+                }
+
                 outputMatrix[row][col] = {
                     redChannel: val,
                     greenChannel: val,
                     blueChannel: val,
                     alphaChannel: 255
                 };
+
             }
         }
         return new ImageData(new Uint8ClampedArray(LogicUtil.unzipPixelMatrixIntoImageData(outputMatrix)), width, height);
@@ -53,7 +68,15 @@ export default class MorphologicalOperationManagerr {
      * @param mask
      */
     static dilate(mask) {
-        return [].concat(...mask).max();
+        let max = mask[0][0].redChannel;
+        for (let i = 0; i < mask.length; i++) {
+            for (let j = 0; j < mask[i].length; j++) {
+                if (mask[i][j].redChannel > max) {
+                    max = mask[i][j].redChannel;
+                }
+            }
+        }
+        return max;
     }
 
     /**

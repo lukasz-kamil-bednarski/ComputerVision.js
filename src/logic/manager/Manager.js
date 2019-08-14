@@ -5,6 +5,7 @@ import ContextOperationManager from "../context-operations/ContextOperationManag
 import ColorSpaceConverter from '../ColorSpaceConverter/ColorSpaceConverter';
 import SegmentationOperationManager from "../segmentation-operations/SegmentationOperationManager";
 import MorphologicalOperationManager from '../morphological-operations/MorphologicalOperationManager';
+import {SETTINGS} from '../../settings/Settings';
 
 class ActionManager{
 
@@ -74,23 +75,25 @@ class ActionManager{
                         modifiedImageData= ContextOperationManager.convertPixelMatrixIntoImageData(modifiedMatrix, imageData.width, imageData.height);
                     }
                     break;
-
                 case '8':
                     const converter = new ColorSpaceConverter();
                     modifiedImageData = converter.switchToGrayScaleByLuminosity(imageData);
                     break;
 
                 case '9':
-                    modifiedImageData = MorphologicalOperationManager.executeMorphologicalOperation(imageData);
+                    modifiedImageData = MorphologicalOperationManager.executeMorphologicalOperation(imageData, SETTINGS.morphologyOperations.EROSION);
                     break;
+
                 case '10':
+                    modifiedImageData = MorphologicalOperationManager.executeMorphologicalOperation(imageData, SETTINGS.morphologyOperations.DILATION);
+                    break;
+                case '11':
                     modifiedImageData = SegmentationOperationManager.binarise(imageData, binarizationThreshold);
                     break;
                 default:
                     console.log("INTERNAL ERROR");
                     return;
             }
-            console.log("works");
             ctx.putImageData(modifiedImageData, 0,0);
         }catch (e) {
             alert(e);

@@ -78,6 +78,13 @@ export const SETTINGS = {
             },
             {
                 id: 10,
+                name: 'dilation',
+                type:'morphology',
+                argumentNumber:1,
+                isParametrized: false,
+            },
+            {
+                id: 11,
                 name: 'binarization',
                 type:'segmentation',
                 argumentNumber:1,
@@ -127,7 +134,14 @@ export const SETTINGS = {
                 step:1
             }
 
-        ]
+        ],
+
+
+    morphologyOperations:{
+        EROSION:1,
+        DILATION:2
+    }
+
 };
 
 export const findActionNameById = (id) => {
