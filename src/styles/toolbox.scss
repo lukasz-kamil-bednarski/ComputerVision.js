@@ -13,7 +13,8 @@
     width: $tool-box-container-width;
     box-sizing: border-box;
     padding: 30px 10px 30px 10px;
-    background: $tool-box-container-bg;
+    background: rgb(34,34,34);
+    background: linear-gradient(0deg, rgba(34,34,34,1) 0%, rgba(241,241,241,1) 100%, rgba(241,241,241,1) 100%);
     height: calc(100vh - #{$header-container-height});
     overflow-y:auto;
 
