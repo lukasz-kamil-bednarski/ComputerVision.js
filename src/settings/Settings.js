@@ -42,7 +42,7 @@ export const SETTINGS = {
 
             {
                 id: 4,
-                name: 'linear-combination',
+                name: 'gaussian filter',
                 type: 'basic',
                 argumentNumber: 2,
                 isParametrized: true
@@ -71,11 +71,17 @@ export const SETTINGS = {
             },
             {
                 id: 9,
+                name: 'erosion',
+                type:'morphology',
+                argumentNumber:1,
+                isParametrized: false,
+            },
+            {
+                id: 10,
                 name: 'binarization',
                 type:'segmentation',
                 argumentNumber:1,
                 isParametrized: true
-
             },
         ]
     ],

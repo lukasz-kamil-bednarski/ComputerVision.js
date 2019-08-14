@@ -5,7 +5,16 @@
   width: 100vw;
   height: calc(100vh - #{$header-container-height});
   @include flex-box(row, center, center, true);
-  background: $main-content-bg-color;
+  //background: $main-content-bg-color;
+  background: linear-gradient($dark-color-theme, $alt-dark-color-theme);
+  //.bg-container{
+  //  position: absolute;
+  //  background: $fresh-color;
+  //  height: 100%;
+  //  width: 100%;
+  //  transform: translate(50px, 0px) skew(6deg, -36deg);
+  //  bottom: -100px;
+  //}
 
 
   .fun-canvas-container{
@@ -59,5 +68,6 @@
       background: white;
     }
   }
+
 
 }
