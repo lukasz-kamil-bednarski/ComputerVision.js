@@ -1,4 +1,4 @@
-import {SETTINGS} from '../settings/Settings'
+import getCanvasSize from "./CanvasSizeUtli";
 
 export default class DrawUtil {
 
@@ -29,23 +29,16 @@ export default class DrawUtil {
      */
     static drawScaledImageOntoCanvas(image, canvas){
         const ctx = canvas.getContext("2d");
-
         const imgWidth = image.naturalWidth;
         const imgHeight = image.naturalHeight;
         let aspectRatio;
 
         if(ctx !== null) {
-
-
             let width;
             let height;
-            if(window.width >= 1200){
-                width = SETTINGS.funCanvasDesktopSize.width;
-                height = SETTINGS.funCanvasDesktopSize.height;
-            }else{
-                width = SETTINGS.funCanvasSmallDesktopSize.width;
-                height = SETTINGS.funCanvasSmallDesktopSize.height;
-            }
+            const size = getCanvasSize();
+            width = size.width;
+            height= size.height;
 
             ctx.canvas.width = width;
             ctx.canvas.height = height; //restoring default values
@@ -59,13 +52,21 @@ export default class DrawUtil {
             } else {
                 if (imgWidth >= imgHeight) {
                     aspectRatio = width / imgWidth;
-                    ctx.canvas.width = width;
-                    ctx.canvas.height = imgHeight * aspectRatio;
+                    if(imgHeight > height){
+                        ctx.canvas.height = height * aspectRatio;
+                    }else{
+                        ctx.canvas.height = imgHeight * aspectRatio;
+                    }
+                    ctx.canvas.width = width * aspectRatio;
                     ctx.drawImage(image, 0, 0, ctx.canvas.width, ctx.canvas.height);
                 } else {
                     aspectRatio = height / imgHeight;
-                    ctx.canvas.width = imgWidth * aspectRatio;
-                    ctx.canvas.height = height;
+                    if(imgHeight > height){
+                        ctx.canvas.width = width * aspectRatio;
+                    }else{
+                        ctx.canvas.width = imgWidth * aspectRatio;
+                    }
+                    ctx.canvas.height = height * aspectRatio;
                     ctx.drawImage(image, 0, 0, ctx.canvas.width, ctx.canvas.height);
                 }
             }

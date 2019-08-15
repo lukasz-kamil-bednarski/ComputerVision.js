@@ -5,8 +5,15 @@ import DrawUtil from '../utils/DrawUtil';
 import downloadIcon from '../assets/png/download.png';
 import rightArrowIcon from '../assets/png/right-arrow.png';
 import {addNewImage} from "../actions/imageGalleryActions";
+import getCanvasSize from "../utils/CanvasSizeUtli";
 
 class MainContent extends React.Component {
+
+
+    constructor(props){
+        super(props);
+        this.canvasSize = getCanvasSize();
+    }
 
     consumeAction = (event) => {
         event.preventDefault();
@@ -75,8 +82,8 @@ class MainContent extends React.Component {
                     }}
                             onDragOver={(event) => event.preventDefault()}
                             onDrop={this.consumeAction}
-                            width={800}
-                            height={600}
+                            width={this.canvasSize.width}
+                            height={this.canvasSize.height}
                             id="fun-canvas"
                             className="fun-canvas active">Your browser is not supporting canvas
                     </canvas>

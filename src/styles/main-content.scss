@@ -5,8 +5,7 @@
   width: 100vw;
   height: calc(100vh - #{$header-container-height});
   @include flex-box(row, center, center, true);
-  //background: $main-content-bg-color;
-  background: linear-gradient($dark-color-theme, $alt-dark-color-theme);
+  //background: linear-gradient($dark-color-theme, $alt-dark-color-theme);
   //.bg-container{
   //  position: absolute;
   //  background: $fresh-color;
@@ -16,10 +15,8 @@
   //  bottom: -100px;
   //}
 
-
   .fun-canvas-container{
     position: absolute;
-
 
     &:hover{
       .main-canvas-action-box {
@@ -66,10 +63,12 @@
     }
 
     .fun-canvas{
-      background: $light-color-theme;
-      opacity: 0.8;
+      //background: url(./assets/jpg/default-image.jpg);
+      background-color: $light-color-theme;
+
+      &.default{
+        opacity: 0.3
+      }
     }
   }
-
-
 }

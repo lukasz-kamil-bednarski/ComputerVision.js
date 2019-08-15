@@ -26,7 +26,7 @@
 
   .image-gallery-content {
     @include flex-box(column, flex-start, center, false);
-    background-color: $light-color-theme;
+    //background-color: $light-color-theme;
     box-sizing: border-box;
     width: $image-gallery-container-width;
     height: calc(100vh - #{$header-container-height});

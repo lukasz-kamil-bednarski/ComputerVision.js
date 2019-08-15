@@ -13,8 +13,8 @@
     width: $tool-box-container-width;
     box-sizing: border-box;
     padding: 30px 10px 30px 10px;
-    background: rgb(34,34,34);
-    background: linear-gradient(0deg, rgba(34,34,34,1) 0%, rgba(241,241,241,1) 100%, rgba(241,241,241,1) 100%);
+    background: url("./assets/jpg/toolbox.jpg");
+    //background: linear-gradient(0deg, rgba(34,34,34,1) 0%, rgba(241,241,241,1) 100%, rgba(241,241,241,1) 100%);
     height: calc(100vh - #{$header-container-height});
     overflow-y:auto;
 
@@ -26,7 +26,7 @@
       transition: 0.7S ease;
       label{
         display: block;
-        color:$dark-color-theme;
+        color: $light-color-theme;
         margin:auto;
         width: 100%;
         height: 100%;
@@ -45,7 +45,7 @@
     }
 
     .drop-zone-label{
-      color:darken($silver-color-theme, 70%);
+      color:darken($light-color-theme, 10%);
       font-weight: 600;
       font-size: 10pt;
       display: block;
@@ -158,6 +158,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    padding: 0;
     padding: 0;
     margin: 0;
     height: calc(100vh - #{$header-container-height});

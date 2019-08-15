@@ -9,6 +9,7 @@ export const SETTINGS = {
         height: 600
     },
 
+
     algorithms: [
         [
             {
