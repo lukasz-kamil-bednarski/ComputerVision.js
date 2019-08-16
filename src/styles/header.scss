@@ -2,13 +2,13 @@
 @import "variables";
 
 .header-container{
-  @include flex-box(row, flex-start, center, true);
+  @include flex-box(row, space-between, center, true);
   @include shadow-box(rgba(0,0,0,0.5), rgba(0,0,0,0.2));
-
   height: $header-container-height;
   background: rgb(2,0,36);
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,255,255,1) 0%, rgba(34,34,34,0.5) 100%);
   width: 100vw;
+
 
   .title-container{
     font-size: 24pt;
@@ -23,6 +23,10 @@
 
       }
     }
+  }
+
+  .social-container{
+
   }
 }
 

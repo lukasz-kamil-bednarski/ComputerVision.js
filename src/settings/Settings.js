@@ -9,6 +9,11 @@ export const SETTINGS = {
         height: 600
     },
 
+    links:{
+        socials:{
+            github: "https://github.com/lukasy09"
+        }
+    },
 
     algorithms: [
         [

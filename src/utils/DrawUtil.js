@@ -36,6 +36,8 @@ export default class DrawUtil {
         if(ctx !== null) {
             let width;
             let height;
+            let drawWidth;
+            let drawHeight;
             const size = getCanvasSize();
             width = size.width;
             height= size.height;
@@ -49,27 +51,21 @@ export default class DrawUtil {
                 ctx.canvas.height = imgHeight;
                 ctx.drawImage(image, 0, 0, imgWidth, imgHeight);
 
-            } else {
-                if (imgWidth >= imgHeight) {
-                    aspectRatio = width / imgWidth;
-                    if(imgHeight > height){
-                        ctx.canvas.height = height * aspectRatio;
-                    }else{
-                        ctx.canvas.height = imgHeight * aspectRatio;
-                    }
-                    ctx.canvas.width = width * aspectRatio;
-                    ctx.drawImage(image, 0, 0, ctx.canvas.width, ctx.canvas.height);
-                } else {
-                    aspectRatio = height / imgHeight;
-                    if(imgHeight > height){
-                        ctx.canvas.width = width * aspectRatio;
-                    }else{
-                        ctx.canvas.width = imgWidth * aspectRatio;
-                    }
-                    ctx.canvas.height = height * aspectRatio;
-                    ctx.drawImage(image, 0, 0, ctx.canvas.width, ctx.canvas.height);
-                }
+            }else if(imgWidth >= width && imgHeight < height){
+                 aspectRatio = width / imgWidth;
+                 drawWidth = imgWidth * aspectRatio;
+                 drawHeight = imgHeight * aspectRatio;
+            }else if(imgWidth < width && imgHeight >= height){
+                aspectRatio = height / imgHeight;
+                drawHeight = imgHeight * aspectRatio;
+                drawWidth = imgWidth * aspectRatio;
+            }else if(imgWidth >= width && imgHeight >= imgHeight){
+                let aspectRatioWidth = width / imgWidth;
+                let aspectRatioHeight = height / imgHeight;
+                drawWidth =  aspectRatioWidth * imgWidth;
+                drawHeight = aspectRatioHeight * imgHeight;
             }
+            ctx.drawImage(image, 0, 0, drawWidth, drawHeight);
 
             return {
                 data:ctx.getImageData(0,0,ctx.canvas.width, ctx.canvas.height),

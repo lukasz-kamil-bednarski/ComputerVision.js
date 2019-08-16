@@ -106,7 +106,8 @@
         margin-top: 20px;
         box-sizing: border-box;
         padding: 8px;
-        background: $dark-color-theme;
+        background: transparent;
+        border: solid 1px $light-color-theme;
         cursor: pointer;
         text-align: center;
         border-radius: 20px;
