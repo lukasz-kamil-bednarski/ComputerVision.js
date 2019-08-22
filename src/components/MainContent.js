@@ -6,13 +6,19 @@ import downloadIcon from '../assets/png/download.png';
 import rightArrowIcon from '../assets/png/right-arrow.png';
 import {addNewImage} from "../actions/imageGalleryActions";
 import getCanvasSize from "../utils/CanvasSizeUtli";
+import CanvasUtil from '../utils/CanvasUtil';
 
 class MainContent extends React.Component {
 
 
+    state = {
+        mousePosition: {}
+    };
+
     constructor(props){
         super(props);
         this.canvasSize = getCanvasSize();
+        this.canvasUtil = new CanvasUtil();
     }
 
     consumeAction = (event) => {
@@ -55,6 +61,14 @@ class MainContent extends React.Component {
 
     };
 
+    trackCursor = (e) => {
+     let mousePosition = this.canvasUtil.getMousePos(this.canvas, e);
+     this.setState({
+        mousePosition: mousePosition
+     });
+
+};
+
     render() {
         return (
             <div className="main-content-container">
@@ -82,11 +96,16 @@ class MainContent extends React.Component {
                     }}
                             onDragOver={(event) => event.preventDefault()}
                             onDrop={this.consumeAction}
+                            onMouseMove={this.trackCursor}
                             width={this.canvasSize.width}
                             height={this.canvasSize.height}
                             id="fun-canvas"
                             className="fun-canvas active">Your browser is not supporting canvas
                     </canvas>
+                </div>
+                <div className="side-info-container">
+                    <span>{this.state.mousePosition.x}</span>
+                    <span>{this.state.mousePosition.y}</span>
                 </div>
             </div>
         );

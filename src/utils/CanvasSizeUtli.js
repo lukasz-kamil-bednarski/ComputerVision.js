@@ -3,7 +3,7 @@ import {SETTINGS} from "../settings/Settings";
 let getCanvasSize = () => {
     let width;
     let height;
-    if(window.width >= 1200){
+    if(window.innerWidth >= 1200){
         width = SETTINGS.funCanvasDesktopSize.width;
         height = SETTINGS.funCanvasDesktopSize.height;
     }else{

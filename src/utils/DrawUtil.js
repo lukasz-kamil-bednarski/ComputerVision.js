@@ -49,7 +49,8 @@ export default class DrawUtil {
             if (imgWidth < width && imgHeight < height) {
                 ctx.canvas.width = imgWidth;
                 ctx.canvas.height = imgHeight;
-                ctx.drawImage(image, 0, 0, imgWidth, imgHeight);
+                drawWidth = imgWidth;
+                drawHeight = imgHeight
 
             }else if(imgWidth >= width && imgHeight < height){
                  aspectRatio = width / imgWidth;
@@ -58,13 +59,16 @@ export default class DrawUtil {
             }else if(imgWidth < width && imgHeight >= height){
                 aspectRatio = height / imgHeight;
                 drawHeight = imgHeight * aspectRatio;
-                drawWidth = imgWidth * aspectRatio;
-            }else if(imgWidth >= width && imgHeight >= imgHeight){
+                drawWidth = imgWidth;
+
+            }else if(imgWidth >= width && imgHeight >= height){
                 let aspectRatioWidth = width / imgWidth;
                 let aspectRatioHeight = height / imgHeight;
                 drawWidth =  aspectRatioWidth * imgWidth;
                 drawHeight = aspectRatioHeight * imgHeight;
             }
+            ctx.canvas.width = drawWidth;
+            ctx.canvas.height = drawHeight;
             ctx.drawImage(image, 0, 0, drawWidth, drawHeight);
 
             return {

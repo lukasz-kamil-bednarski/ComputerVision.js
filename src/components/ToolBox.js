@@ -3,6 +3,7 @@ import Dropzone from 'react-dropzone'
 import DrawUtil from '../utils/DrawUtil'
 import {addNewImage} from "../actions/imageGalleryActions";
 import {setAction} from "../actions/toolboxActions";
+import {addImageInfo} from "../actions/toolboxActions";
 import {connect} from 'react-redux';
 import {SETTINGS} from "../settings/Settings";
 import dropLogo from "../assets/svg/dnd.svg"
@@ -14,11 +15,15 @@ class ToolBox extends React.Component {
 
     state = {
         currentActionId:0,
-        currentActionName: 'None'
+        currentActionName: 'NONE'
     };
 
     addNewImage = (img) => {
         this.props.addNewImage(img);
+    };
+
+    addNewImageInfo = (img) => {
+      this.props.addImageInfo(img) ;
     };
 
     /**
@@ -35,9 +40,14 @@ class ToolBox extends React.Component {
             img.onload = () => {
                 URL.revokeObjectURL(img.src);
                 DrawUtil.drawScaledImageOntoCanvas(img, canvas);
+                this.addNewImageInfo({
+                    width: img.naturalWidth,
+                    height: img.naturalHeight
+                });
             };
             img.src = url;
             this.addNewImage(img);
+
         }
 
     };
@@ -72,6 +82,7 @@ class ToolBox extends React.Component {
      */
     handleFileInput = (event) =>{
         let files = event.target.files;
+        console.log(files);
         this.drawDroppedImage(files);
     };
 
@@ -160,7 +171,8 @@ const mapStateToProps = state => {
 };
 const mapActionsToProps = {
     addNewImage: addNewImage,
-    setAction: setAction
+    setAction: setAction,
+    addImageInfo: addImageInfo
 
 };
 
