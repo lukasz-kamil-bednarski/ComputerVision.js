@@ -50,7 +50,7 @@ export const SETTINGS = {
                 id: 5,
                 name: 'gaussian filter',
                 type: 'basic',
-                argumentNumber: 2,
+                argumentNumber: 1,
                 isParametrized: true
             },
             {
@@ -138,6 +138,13 @@ export const SETTINGS = {
                 min: -10,
                 max: 10,
                 step:1
+            },
+            {
+                id:5,
+                name:'normalization active',
+                type:'checkbox',
+                inputType: 'number',
+                defaultActive: false
             }
 
         ],
@@ -146,6 +153,13 @@ export const SETTINGS = {
     morphologyOperations:{
         EROSION:1,
         DILATION:2
+    },
+
+    parametersTypes: {
+        RANGE: 'range',
+        KERNEL: 'kernel',
+        SWITCH: 'checkbox'
+
     }
 
 };

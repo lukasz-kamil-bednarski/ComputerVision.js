@@ -43,7 +43,7 @@ class ParametersBox extends React.Component {
 
     renderParameters = (parameter) => {
         switch (parameter.type) {
-            case 'range':
+            case SETTINGS.parametersTypes.RANGE:
                 return (
                     <div key={parameter.name} className="single-parameter-container">
                         <span>{parameter.name === 'linear-combination-parameter' ? this.props.parameters.linearCombinationParameter :
@@ -58,12 +58,21 @@ class ParametersBox extends React.Component {
                         <span>{parameter.name}</span>
                     </div>);
 
-            case 'matrix':
+            case SETTINGS.parametersTypes.KERNEL:
                 return(
                     <KernelMatrix min={parameter.min}
                                   max={parameter.max}
                                   name = {parameter.name}
                                   type={parameter.type}/>
+                );
+
+
+            case SETTINGS.parametersTypes.SWITCH:
+                return(
+                    <div>
+                        <input type={parameter.type}/>
+                        <span></span>
+                    </div>
                 );
 
             default:
